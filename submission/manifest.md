@@ -4,7 +4,7 @@
 - 서비스명: SkillForge
 - 추천 저장소명: skillforge
 - GitHub: https://github.com/kkokkiyo/skillforge (공개 소스·실행 증거 업로드 및 비로그인 조회 확인)
-- 영상 URL: 아직 생성하지 않음
+- 영상 URL: https://github.com/kkokkiyo/skillforge/blob/main/output/video/SkillForge-evidence-walkthrough.mp4
 - 모델: nvidia/nemotron-3-super-120b-a12b
 - 실제 비교 평가: eval-dc5a773edccd641d, 합성 Test 40건 x A/B/C, 1회 반복
 - 이전 실패가 많은 평가: eval-1fbaadfc4c465a19, 삭제하지 않고 보존
@@ -13,7 +13,7 @@
 - 팀원 개인정보와 .env/.enc.API/운영자 토큰/SQLite DB는 제출 묶음에 포함하지 않음
 - 로컬 실행 주소는 심사자용 배포 URL이 아님
 
-PDF에는 공개 GitHub URL을 반영합니다. 영상 링크와 공식 Skill API 요구 확인 후 최종 제출 여부를 판단합니다. Google Form 개인정보와 동의·최종 제출은 각 팀원이 직접 합니다.
+PDF에는 공개 GitHub URL을 반영했습니다. 영상 파일은 저장소에서 다운로드할 수 있으며 비로그인 접근 HTTP 200을 확인했습니다. 공식 Skill API 요구 확인 후 최종 제출 여부를 판단합니다. Google Form 개인정보와 동의·최종 제출은 각 팀원이 직접 합니다.
 
 ## 현재 전달 파일과 제출 순서
 

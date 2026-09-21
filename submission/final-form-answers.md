@@ -27,5 +27,6 @@ SkillForge는 에이전트의 성공 기록을 검증 가능한 선형 워크플
 ## 제출 정보
 
 GitHub: https://github.com/kkokkiyo/skillforge
-영상 URL: 추후 업로드
+영상 URL: https://github.com/kkokkiyo/skillforge/blob/main/output/video/SkillForge-evidence-walkthrough.mp4
+3분 자막형 실행 증거 재생 자료입니다. 실제 브라우저 녹화가 아니며 GitHub에서 다운로드해 재생할 수 있습니다.
 공개 저장소에는 API 키, 운영자 토큰, 개인 연락처, SQLite DB를 올리지 않습니다. 각 팀원은 본인 개인정보·동의를 직접 작성하고 공통 포트폴리오 파일을 사용합니다.
