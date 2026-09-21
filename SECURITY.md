@@ -4,8 +4,9 @@
 
 - `NVIDIA_API_KEY`, `SKILLFORGE_OPERATOR_SESSION` 같은 값은 `.env.API`, `.enc.API`, `.env.local` 또는 프로세스 환경에만 둡니다.
 - API 키, 운영자 토큰, 개인정보, 실제 결제 데이터, SQLite 데이터베이스는 커밋하지 않습니다.
-- `.gitignore`가 로컬 환경 파일, 런타임, 데이터베이스와 `artifacts/` 작업 산출물을 제외합니다.
+- `.gitignore`가 로컬 환경 파일, 런타임, 데이터베이스와 새 `artifacts/` 작업 산출물을 제외합니다. 공개 manifest에 명시되고 검사된 합성 실행 증거만 예외적으로 추적합니다.
 - 공개 제출 묶음은 `scripts/package_submission.py`의 credential scan을 통과해야 생성됩니다.
+- `scripts/audit_public_files.py`는 manifest 해시, 로컬 키·세션 값 일치, 알려진 토큰·개인 이메일·전화번호 패턴, 전체 Git 이력을 검사합니다. 검사 결과에는 비밀값을 출력하지 않습니다. 패턴 검사는 모든 개인정보의 부재를 보장하지 않으므로 새로운 실데이터를 추가하지 않습니다.
 - 키가 노출되었다고 의심되면 NVIDIA 콘솔에서 즉시 폐기하고 새 키를 발급한 뒤 로컬 파일만 교체합니다.
 
 이 데모의 인증은 루프백 운영 콘솔용입니다. 인터넷 공개 운영 서비스의 인증 체계로 사용하지 않습니다.
