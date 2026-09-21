@@ -3,7 +3,7 @@
 - 팀명: TraceMakers
 - 서비스명: SkillForge
 - 추천 저장소명: skillforge
-- GitHub: https://github.com/kkokkiyo/skillforge (공개 저장소, 현재 비어 있음)
+- GitHub: https://github.com/kkokkiyo/skillforge (공개 소스·실행 증거 업로드 및 비로그인 조회 확인)
 - 영상 URL: 아직 생성하지 않음
 - 모델: nvidia/nemotron-3-super-120b-a12b
 - 실제 비교 평가: eval-dc5a773edccd641d, 합성 Test 40건 x A/B/C, 1회 반복
