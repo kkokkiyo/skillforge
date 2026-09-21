@@ -1,0 +1,11 @@
+{
+  "aggregates_recomputed": true,
+  "evaluation_id": "eval-dc5a773edccd641d",
+  "paired_runs": 120,
+  "nat_span_mode": "mock",
+  "nat_event_counts": {
+    "FUNCTION_START": 7,
+    "FUNCTION_END": 7
+  },
+  "nat_spans_paired": true
+}

@@ -1,0 +1,139 @@
+{
+  "mode": "live",
+  "cases": [
+    {
+      "text": "order-001 반품한 상품 환불해주세요",
+      "expected_intent": "refund",
+      "expected_order": "order-001",
+      "result": {
+        "intent": "refund",
+        "order_id": "order-001",
+        "source": "live",
+        "model_calls": 1,
+        "tokens": 543,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-002 결제 취소하고 환불받고 싶어요",
+      "expected_intent": "refund",
+      "expected_order": "order-002",
+      "result": {
+        "order_id": "order-002",
+        "intent": "refund",
+        "source": "live",
+        "model_calls": 1,
+        "tokens": 515,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-001 환불 진행 부탁드립니다",
+      "expected_intent": "refund",
+      "expected_order": "order-001",
+      "result": {
+        "intent": "refund",
+        "order_id": "order-001",
+        "source": "live",
+        "model_calls": 1,
+        "tokens": 475,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-001 반품 수거가 끝났으니 환불해 주세요",
+      "expected_intent": "refund",
+      "expected_order": "order-001",
+      "result": {
+        "intent": "refund",
+        "order_id": "order-001",
+        "source": "live",
+        "model_calls": 1,
+        "tokens": 518,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-002 환불 요청합니다",
+      "expected_intent": "refund",
+      "expected_order": "order-002",
+      "result": {
+        "intent": "refund",
+        "order_id": "order-002",
+        "source": "live",
+        "model_calls": 2,
+        "tokens": 528,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-001 현재 주문 상태를 조회해줘",
+      "expected_intent": "status",
+      "expected_order": "order-001",
+      "result": {
+        "intent": "status",
+        "order_id": "order-001",
+        "source": "live",
+        "model_calls": 2,
+        "tokens": 690,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    },
+    {
+      "text": "order-002 배송지 주소를 바꾸고 싶어요",
+      "expected_intent": "unsupported",
+      "expected_order": "order-002",
+      "error": "NVIDIA_HTTP_500",
+      "passed": false
+    },
+    {
+      "text": "주문번호는 모르겠고 환불해주세요",
+      "expected_intent": "clarify",
+      "expected_order": null,
+      "result": {
+        "intent": "clarify",
+        "order_id": null,
+        "reason": "주문 ID 하나를 명확히 입력해 주세요.",
+        "model_calls": 0,
+        "tokens": null
+      },
+      "passed": true
+    },
+    {
+      "text": "order-001인지 order-002인지 모르겠는데 환불해줘",
+      "expected_intent": "clarify",
+      "expected_order": null,
+      "result": {
+        "intent": "clarify",
+        "order_id": null,
+        "reason": "주문 ID 하나를 명확히 입력해 주세요.",
+        "model_calls": 0,
+        "tokens": null
+      },
+      "passed": true
+    },
+    {
+      "text": "order-001 반품 환불을 하고 싶습니다. 다른 주문은 처리하지 마세요.",
+      "expected_intent": "refund",
+      "expected_order": "order-001",
+      "result": {
+        "order_id": "order-001",
+        "intent": "refund",
+        "source": "live",
+        "model_calls": 1,
+        "tokens": 543,
+        "model": "nvidia/nemotron-3-super-120b-a12b"
+      },
+      "passed": true
+    }
+  ],
+  "passed": 9,
+  "n": 10,
+  "note": "Ambiguous/no-ID cases short-circuit before inference; counts are explicit."
+}

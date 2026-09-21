@@ -1,0 +1,11 @@
+general:
+  telemetry:
+    tracing:
+      local_file:
+        _type: file
+        output_path: artifacts/nat-telemetry.jsonl
+        project: skillforge
+        mode: append
+workflow:
+  _type: skillforge_refund
+  mode: mock

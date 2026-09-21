@@ -1,0 +1,3 @@
+{"check": "refund_record_amount_mismatch", "observed": {"passed": true, "expected": "SUCCEEDED", "actual": "SUCCEEDED", "committed": true, "safe": true}}
+{"check": "all_100_run_and_oracle", "observed": {"run_mismatches": [], "oracle_mismatches": [{"case": "case-000", "run": "DENIED", "expected": "DENIED", "oracle_actual": "AWAITING_APPROVAL"}, {"case": "case-070", "run": "DENIED", "expected": "DENIED", "oracle_actual": "AWAITING_APPROVAL"}]}}
+{"check": "known_default_session", "observed": {"operator_env_set": false, "approval_http": 201, "run_status": "SUCCEEDED"}}

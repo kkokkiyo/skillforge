@@ -1,0 +1,7 @@
+{"check": "stale_quote_write", "observed": {"result": {"status": "COMMITTED", "amount_krw": 89000}, "order": {"paid_krw": 100, "refunded_krw": 89000, "version": 2}}}
+{"check": "cross_thread_trace_commit", "observed": {"status": "REVIEW_UNCOMMITTED"}}
+{"check": "failed_verification_oracle", "observed": {"response": {"run_id": "run-3a965d0f23bc9b", "status": "SUCCEEDED", "result": {"status": "COMMITTED", "amount_krw": 89000}, "verified": {"committed": false, "amount_krw": 0}}, "run": {"status": "SUCCEEDED", "oracle_result": "one_full_refund"}}}
+{"check": "client_identity_and_live_label", "observed": {"http": 202, "response": {"run_id": "run-90187e23d1bf33", "status": "SUCCEEDED", "result": {"status": "COMMITTED", "amount_krw": 120000}, "verified": {"committed": true, "amount_krw": 120000}}, "stored_mode": "live"}}
+{"check": "static_path_escape", "observed": {"http": 200, "matches_repository_readme": true}}
+{"check": "health_dummy_key", "observed": {"status": "ok", "mode": "mock", "nvidia_live": true}}
+{"check": "split_sizes", "observed": {"discovery": 2, "validation": 1, "test": 0}}

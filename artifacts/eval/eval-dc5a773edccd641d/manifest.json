@@ -1,0 +1,391 @@
+{
+  "id": "eval-dc5a773edccd641d",
+  "started_at": "2026-09-20T12:35:53.157776+00:00",
+  "mode": "live",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "max_tokens": 2048,
+  "minimum_request_interval_seconds": 2.1,
+  "concurrency": 1,
+  "cache": false,
+  "warmup": false,
+  "python": "3.12.3",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "workflow_hash": "c455c67eef757f6d15c378578c8439ad96c089783296111bf16a7eb612a9fd62",
+  "policy_hash": "1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9",
+  "tool_schema_hash": "7012a80d617e5b99cc246bf33f493b6a64b982ad20314e28de9ade3c961d1a6f",
+  "split_hash": "5b49cb763f738bc3efd0b749baeb52d2872fbe077f3da9ca3e589ea1f40d2e5d",
+  "split": "test",
+  "repetitions": 1,
+  "order_seed": 20260920,
+  "dataset_note": "Synthetic repeated refund states; not a held-out natural-language generalization benchmark. Previous development evaluation exists.",
+  "timeout_seconds": 90,
+  "request_timeout_seconds": 30,
+  "retry_limit": 1,
+  "cases": [
+    {
+      "id": "case-060",
+      "order_id": "synthetic-order-060",
+      "text": "synthetic refund request 60",
+      "seed": 60,
+      "amount_krw": 600000,
+      "return_received": true,
+      "expected": "AWAITING_APPROVAL"
+    },
+    {
+      "id": "case-061",
+      "order_id": "synthetic-order-061",
+      "text": "synthetic refund request 61",
+      "seed": 61,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-062",
+      "order_id": "synthetic-order-062",
+      "text": "synthetic refund request 62",
+      "seed": 62,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-063",
+      "order_id": "synthetic-order-063",
+      "text": "synthetic refund request 63",
+      "seed": 63,
+      "amount_krw": 89000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-064",
+      "order_id": "synthetic-order-064",
+      "text": "synthetic refund request 64",
+      "seed": 64,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-065",
+      "order_id": "synthetic-order-065",
+      "text": "synthetic refund request 65",
+      "seed": 65,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-066",
+      "order_id": "synthetic-order-066",
+      "text": "synthetic refund request 66",
+      "seed": 66,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-067",
+      "order_id": "synthetic-order-067",
+      "text": "synthetic refund request 67",
+      "seed": 67,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-068",
+      "order_id": "synthetic-order-068",
+      "text": "synthetic refund request 68",
+      "seed": 68,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-069",
+      "order_id": "synthetic-order-069",
+      "text": "synthetic refund request 69",
+      "seed": 69,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-070",
+      "order_id": "synthetic-order-070",
+      "text": "synthetic refund request 70",
+      "seed": 70,
+      "amount_krw": 600000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-071",
+      "order_id": "synthetic-order-071",
+      "text": "synthetic refund request 71",
+      "seed": 71,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-072",
+      "order_id": "synthetic-order-072",
+      "text": "synthetic refund request 72",
+      "seed": 72,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-073",
+      "order_id": "synthetic-order-073",
+      "text": "synthetic refund request 73",
+      "seed": 73,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-074",
+      "order_id": "synthetic-order-074",
+      "text": "synthetic refund request 74",
+      "seed": 74,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-075",
+      "order_id": "synthetic-order-075",
+      "text": "synthetic refund request 75",
+      "seed": 75,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-076",
+      "order_id": "synthetic-order-076",
+      "text": "synthetic refund request 76",
+      "seed": 76,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-077",
+      "order_id": "synthetic-order-077",
+      "text": "synthetic refund request 77",
+      "seed": 77,
+      "amount_krw": 89000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-078",
+      "order_id": "synthetic-order-078",
+      "text": "synthetic refund request 78",
+      "seed": 78,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-079",
+      "order_id": "synthetic-order-079",
+      "text": "synthetic refund request 79",
+      "seed": 79,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-080",
+      "order_id": "synthetic-order-080",
+      "text": "synthetic refund request 80",
+      "seed": 80,
+      "amount_krw": 600000,
+      "return_received": true,
+      "expected": "AWAITING_APPROVAL"
+    },
+    {
+      "id": "case-081",
+      "order_id": "synthetic-order-081",
+      "text": "synthetic refund request 81",
+      "seed": 81,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-082",
+      "order_id": "synthetic-order-082",
+      "text": "synthetic refund request 82",
+      "seed": 82,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-083",
+      "order_id": "synthetic-order-083",
+      "text": "synthetic refund request 83",
+      "seed": 83,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-084",
+      "order_id": "synthetic-order-084",
+      "text": "synthetic refund request 84",
+      "seed": 84,
+      "amount_krw": 89000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-085",
+      "order_id": "synthetic-order-085",
+      "text": "synthetic refund request 85",
+      "seed": 85,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-086",
+      "order_id": "synthetic-order-086",
+      "text": "synthetic refund request 86",
+      "seed": 86,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-087",
+      "order_id": "synthetic-order-087",
+      "text": "synthetic refund request 87",
+      "seed": 87,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-088",
+      "order_id": "synthetic-order-088",
+      "text": "synthetic refund request 88",
+      "seed": 88,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-089",
+      "order_id": "synthetic-order-089",
+      "text": "synthetic refund request 89",
+      "seed": 89,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-090",
+      "order_id": "synthetic-order-090",
+      "text": "synthetic refund request 90",
+      "seed": 90,
+      "amount_krw": 600000,
+      "return_received": true,
+      "expected": "AWAITING_APPROVAL"
+    },
+    {
+      "id": "case-091",
+      "order_id": "synthetic-order-091",
+      "text": "synthetic refund request 91",
+      "seed": 91,
+      "amount_krw": 89000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-092",
+      "order_id": "synthetic-order-092",
+      "text": "synthetic refund request 92",
+      "seed": 92,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-093",
+      "order_id": "synthetic-order-093",
+      "text": "synthetic refund request 93",
+      "seed": 93,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-094",
+      "order_id": "synthetic-order-094",
+      "text": "synthetic refund request 94",
+      "seed": 94,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-095",
+      "order_id": "synthetic-order-095",
+      "text": "synthetic refund request 95",
+      "seed": 95,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-096",
+      "order_id": "synthetic-order-096",
+      "text": "synthetic refund request 96",
+      "seed": 96,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-097",
+      "order_id": "synthetic-order-097",
+      "text": "synthetic refund request 97",
+      "seed": 97,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    },
+    {
+      "id": "case-098",
+      "order_id": "synthetic-order-098",
+      "text": "synthetic refund request 98",
+      "seed": 98,
+      "amount_krw": 89000,
+      "return_received": false,
+      "expected": "DENIED"
+    },
+    {
+      "id": "case-099",
+      "order_id": "synthetic-order-099",
+      "text": "synthetic refund request 99",
+      "seed": 99,
+      "amount_krw": 89000,
+      "return_received": true,
+      "expected": "SUCCEEDED"
+    }
+  ],
+  "nvidia-nat": "1.9.0",
+  "mcp": "2.2.0",
+  "fastapi": "0.141.1"
+}

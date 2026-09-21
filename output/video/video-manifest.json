@@ -1,0 +1,11 @@
+{
+  "duration_seconds": 180.0,
+  "size": [
+    1280,
+    720
+  ],
+  "format": "captioned evidence replay",
+  "not_browser_recording": true,
+  "source_evaluation": "eval-dc5a773edccd641d",
+  "source_live_run": "run-5f318a0e32d69499690a"
+}

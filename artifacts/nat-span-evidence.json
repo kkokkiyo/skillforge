@@ -1,0 +1,439 @@
+{
+  "mode": "mock",
+  "run_id": "run-781f72498b5de36d39d3",
+  "events": [
+    {
+      "parent_id": "ec803da0-c82f-47db-a376-5580c093de3c",
+      "function_ancestry": {
+        "function_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "function_name": "skillforge_refund",
+        "parent_id": "ec803da0-c82f-47db-a376-5580c093de3c",
+        "parent_name": "<workflow>"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.1034126,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "skillforge_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001",
+            "mode": "mock"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "c4b6ca98-d0d7-4f1e-b6c7-8710ffa3a3a6",
+        "function_name": "get_order",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.103691,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_order",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "c4b6ca98-d0d7-4f1e-b6c7-8710ffa3a3a6"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "c4b6ca98-d0d7-4f1e-b6c7-8710ffa3a3a6",
+        "function_name": "get_order",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.1038754,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_order",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": {
+            "id": "order-001",
+            "customer_id": "cust-001",
+            "paid_krw": 89000,
+            "refunded_krw": 0,
+            "version": 1,
+            "status": "DELIVERED"
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "c4b6ca98-d0d7-4f1e-b6c7-8710ffa3a3a6"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "e52ec8e1-1208-41d7-9120-00644a78a7a4",
+        "function_name": "get_return_status",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.1040049,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_return_status",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "e52ec8e1-1208-41d7-9120-00644a78a7a4"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "e52ec8e1-1208-41d7-9120-00644a78a7a4",
+        "function_name": "get_return_status",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.1041193,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_return_status",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": {
+            "received": true,
+            "version": 1
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "e52ec8e1-1208-41d7-9120-00644a78a7a4"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "ad0d4231-2fea-4c50-b1ba-0315a1bb9121",
+        "function_name": "get_refund_policy",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.1041825,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_refund_policy",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "ad0d4231-2fea-4c50-b1ba-0315a1bb9121"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "ad0d4231-2fea-4c50-b1ba-0315a1bb9121",
+        "function_name": "get_refund_policy",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.104273,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "get_refund_policy",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": {
+            "policy_hash": "1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9",
+            "approval_limit_krw": 500000
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "ad0d4231-2fea-4c50-b1ba-0315a1bb9121"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "f30fc64a-2406-48a1-b12a-bc7d7262d32f",
+        "function_name": "quote_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.1043265,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "quote_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "f30fc64a-2406-48a1-b12a-bc7d7262d32f"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "f30fc64a-2406-48a1-b12a-bc7d7262d32f",
+        "function_name": "quote_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.1045783,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "quote_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": {
+            "quote_id": "quote-74c2d399c3",
+            "amount_krw": 89000,
+            "order_version": 1,
+            "policy_hash": "1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9",
+            "expires_at": "2026-09-20T13:03:35.104511+00:00"
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "f30fc64a-2406-48a1-b12a-bc7d7262d32f"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "e3ee56c6-56b4-4e30-923e-e1fa0324bd17",
+        "function_name": "issue_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.104715,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "issue_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001",
+            "quote_id": "quote-74c2d399c3",
+            "idempotency_key": "run-781f72498b5de36d39d3"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "e3ee56c6-56b4-4e30-923e-e1fa0324bd17"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "e3ee56c6-56b4-4e30-923e-e1fa0324bd17",
+        "function_name": "issue_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.1050491,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "issue_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001",
+            "quote_id": "quote-74c2d399c3",
+            "idempotency_key": "run-781f72498b5de36d39d3"
+          },
+          "output": {
+            "status": "COMMITTED",
+            "amount_krw": 89000
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "e3ee56c6-56b4-4e30-923e-e1fa0324bd17"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "049046a1-0473-45b2-bfbb-e59d0bc2d3a2",
+        "function_name": "verify_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_START",
+        "event_timestamp": 1789909115.1051273,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "verify_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": null,
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "049046a1-0473-45b2-bfbb-e59d0bc2d3a2"
+      }
+    },
+    {
+      "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+      "function_ancestry": {
+        "function_id": "049046a1-0473-45b2-bfbb-e59d0bc2d3a2",
+        "function_name": "verify_refund",
+        "parent_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "parent_name": "skillforge_refund"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.1052496,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "verify_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001"
+          },
+          "output": {
+            "committed": true,
+            "amount_krw": 89000
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "049046a1-0473-45b2-bfbb-e59d0bc2d3a2"
+      }
+    },
+    {
+      "parent_id": "ec803da0-c82f-47db-a376-5580c093de3c",
+      "function_ancestry": {
+        "function_id": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a",
+        "function_name": "skillforge_refund",
+        "parent_id": "ec803da0-c82f-47db-a376-5580c093de3c",
+        "parent_name": "<workflow>"
+      },
+      "payload": {
+        "event_type": "FUNCTION_END",
+        "event_timestamp": 1789909115.105377,
+        "span_event_timestamp": null,
+        "framework": null,
+        "name": "skillforge_refund",
+        "tags": null,
+        "metadata": null,
+        "data": {
+          "input": {
+            "order_id": "order-001",
+            "mode": "mock"
+          },
+          "output": {
+            "run_id": "run-781f72498b5de36d39d3",
+            "status": "SUCCEEDED",
+            "metrics": {
+              "model_calls": 0,
+              "mock_decisions": 6,
+              "tool_calls": 6,
+              "tokens": null,
+              "latency_ms": 1.791
+            }
+          },
+          "chunk": null,
+          "payload": null
+        },
+        "usage_info": null,
+        "UUID": "d9e92ca3-dde2-4fca-9cde-36bfd9eda22a"
+      }
+    }
+  ]
+}

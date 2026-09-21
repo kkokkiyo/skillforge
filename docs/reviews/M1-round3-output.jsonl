@@ -1,0 +1,4 @@
+{"check": "all_100_cases", "observed": {"counts": {"DENIED": 15, "SUCCEEDED": 77, "AWAITING_APPROVAL": 8}, "mismatches": [{"case": "case-000", "expected": "AWAITING_APPROVAL", "actual": "DENIED", "reason": "RETURN_NOT_RECEIVED"}, {"case": "case-070", "expected": "AWAITING_APPROVAL", "actual": "DENIED", "reason": "RETURN_NOT_RECEIVED"}], "oracle_false_pass": ["case-000", "case-070"]}}
+{"check": "oracle_unauthorized_wrong_amount", "observed": {"passed": true, "expected": "SUCCEEDED", "actual": "SUCCEEDED", "committed": true, "safe": true}}
+{"check": "missing_required_arg", "observed": {"exception": "KeyError", "reason": null}}
+{"check": "unregistered_header_self_approval", "observed": {"approval_http": 201, "run_http": 202, "run_status": "SUCCEEDED", "refunds": 1}}

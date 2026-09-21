@@ -1,0 +1,13 @@
+{
+  "tools": [
+    "get_order",
+    "get_return_status",
+    "get_refund_policy",
+    "quote_refund",
+    "issue_refund",
+    "verify_refund"
+  ],
+  "refund_verified": true,
+  "ownership_denied": true,
+  "transport": "stdio"
+}

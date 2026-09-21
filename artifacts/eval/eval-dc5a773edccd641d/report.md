@@ -1,0 +1,90 @@
+# SkillForge evaluation eval-dc5a773edccd641d
+
+Mode: **live**. Synthetic executor-only comparison. Mock results cannot establish LLM speedup. Failures retained; inspect provider error coverage before comparing latency.
+
+| Arm | Cases | Pass | Unsafe commit | Model calls | p50 ms | p95 ms |
+|---|---:|---:|---:|---:|---:|---:|
+| react | 40 | 34 | 0 | 244 | 17836.283 | 32305.052 |
+| manual | 40 | 40 | 0 | 0 | 0.417 | 1.002 |
+| compiled | 40 | 40 | 0 | 0 | 0.391 | 0.804 |
+
+## Failure and usage coverage
+
+```json
+{
+  "react": {
+    "n": 40,
+    "passed": 34,
+    "unsafe": 0,
+    "normal_n": 31,
+    "normal_passed": 26,
+    "unsafe_attempts_blocked": 3,
+    "model_calls": 244,
+    "tool_calls": 208,
+    "reported_tokens": 221497,
+    "usage_responses": 209,
+    "model_responses": 209,
+    "usage_missing_responses": 0,
+    "p50_ms": 17836.283,
+    "p95_ms": 32305.052,
+    "normal_success_p50_ms": 18493.401,
+    "normal_success_p95_ms": 36097.311,
+    "failures_by_reason": {
+      "NVIDIA_HTTP_500": 5,
+      "QUOTE_BINDING_INVALID": 1
+    },
+    "routing_error_rate": null,
+    "routing_note": "Executor comparison; common text routing excluded equally. Router has separate integration tests.",
+    "approval_wait_ms": null,
+    "approval_wait_note": "Pending is terminal in these fixtures; operator think time not simulated."
+  },
+  "manual": {
+    "n": 40,
+    "passed": 40,
+    "unsafe": 0,
+    "normal_n": 31,
+    "normal_passed": 31,
+    "unsafe_attempts_blocked": 3,
+    "model_calls": 0,
+    "tool_calls": 225,
+    "reported_tokens": null,
+    "usage_responses": 0,
+    "model_responses": 0,
+    "usage_missing_responses": 0,
+    "p50_ms": 0.417,
+    "p95_ms": 1.002,
+    "normal_success_p50_ms": 0.451,
+    "normal_success_p95_ms": 1.137,
+    "failures_by_reason": {},
+    "routing_error_rate": null,
+    "routing_note": "Executor comparison; common text routing excluded equally. Router has separate integration tests.",
+    "approval_wait_ms": null,
+    "approval_wait_note": "Pending is terminal in these fixtures; operator think time not simulated."
+  },
+  "compiled": {
+    "n": 40,
+    "passed": 40,
+    "unsafe": 0,
+    "normal_n": 31,
+    "normal_passed": 31,
+    "unsafe_attempts_blocked": 3,
+    "model_calls": 0,
+    "tool_calls": 225,
+    "reported_tokens": null,
+    "usage_responses": 0,
+    "model_responses": 0,
+    "usage_missing_responses": 0,
+    "p50_ms": 0.391,
+    "p95_ms": 0.804,
+    "normal_success_p50_ms": 0.432,
+    "normal_success_p95_ms": 1.042,
+    "failures_by_reason": {},
+    "routing_error_rate": null,
+    "routing_note": "Executor comparison; common text routing excluded equally. Router has separate integration tests.",
+    "approval_wait_ms": null,
+    "approval_wait_note": "Pending is terminal in these fixtures; operator think time not simulated."
+  }
+}
+```
+
+Every measurement is backed by runs.jsonl; manifest.json fixes settings and split.

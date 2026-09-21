@@ -1,0 +1,11 @@
+{"check": "quote_commits_another_transaction", "observed": {"order_status": "SHOULD_ROLL_BACK", "thread_errors": []}}
+{"check": "post_commit_exception", "observed": {"exception": "TimeoutError", "run": {"status": "RUNNING", "finished_at": null}, "refunds": 1}}
+{"check": "oracle_accepts_mutation_on_denied", "observed": {"passed": true, "expected": "DENIED", "actual": "DENIED", "committed": false}}
+{"check": "oracle_accepts_normal_as_pending", "observed": {"passed": true, "expected": "AWAITING_APPROVAL", "actual": "AWAITING_APPROVAL", "committed": false}}
+{"check": "fixture_coverage", "observed": {"defined": 100, "present_orders": 0}}
+{"check": "order_text_seed_leak_accepted", "observed": true}
+{"check": "quote_provenance", "observed": {"idempotency_key": "context.idempotency_key", "order_id": "input.order_id", "quote_id": "input.order_id"}}
+{"check": "fresh_quote_after_policy_change", "observed": {"run_id": "run-02592a323fddb7", "status": "DENIED", "reason_code": "STALE_POLICY"}}
+{"check": "traversal_fixed", "observed": [404, {"error": "not_found"}]}
+{"check": "identity_fixed", "observed": [202, {"run_id": "run-db81b6abf58109", "status": "DENIED", "reason_code": "OWNERSHIP_DENIED"}]}
+{"check": "live_fixed", "observed": [202, {"run_id": "run-b20fd6ec93a2d5", "status": "FAILED", "reason_code": "LIVE_PROVIDER_UNAVAILABLE", "live_verified": false}]}

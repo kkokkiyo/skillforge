@@ -1,0 +1,293 @@
+{
+  "result": {
+    "run_id": "run-5f318a0e32d69499690a",
+    "status": "SUCCEEDED",
+    "reason_code": null,
+    "mode": "live",
+    "live_verified": true,
+    "metrics": {
+      "model_calls": 10,
+      "mock_decisions": 0,
+      "tool_calls": 6,
+      "tokens": 6917,
+      "latency_ms": 8398.297
+    },
+    "verified": {
+      "committed": true,
+      "amount_krw": 89000
+    },
+    "oracle": {
+      "passed": true,
+      "expected": "SUCCEEDED",
+      "actual": "SUCCEEDED",
+      "committed": true,
+      "safe": true
+    },
+    "result": {
+      "status": "COMMITTED",
+      "amount_krw": 89000
+    }
+  },
+  "events": [
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 1,
+      "kind": "run.started",
+      "payload": "{\"input_ref\": \"live-61c33a2950e4\", \"mode\": \"live\"}",
+      "timestamp": "2026-09-20T10:08:24.587834+00:00",
+      "provenance": "{\"input_ref\": \"request.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 2,
+      "kind": "execution.context",
+      "payload": "{\"before_refunded_krw\": 0, \"order_id\": \"live-61c33a2950e4\", \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\", \"source\": \"live\", \"tool_schema_hash\": \"7012a80d617e5b99cc246bf33f493b6a64b982ad20314e28de9ade3c961d1a6f\"}",
+      "timestamp": "2026-09-20T10:08:24.590987+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 3,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_order\"], \"turn\": 1}",
+      "timestamp": "2026-09-20T10:08:25.687516+00:00",
+      "provenance": "{}",
+      "duration_ms": 1093.7224569970567,
+      "usage_json": "{\"prompt_tokens\": 752, \"completion_tokens\": 108, \"total_tokens\": 860}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 4,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"live-61c33a2950e4\"}, \"tool\": \"get_order\"}",
+      "timestamp": "2026-09-20T10:08:25.699336+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 5,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"customer_id\": \"cust-001\", \"id\": \"live-61c33a2950e4\", \"paid_krw\": 89000, \"refunded_krw\": 0, \"status\": \"DELIVERED\", \"version\": 1}, \"tool\": \"get_order\"}",
+      "timestamp": "2026-09-20T10:08:25.702521+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 6,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-20T10:08:25.900544+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 7,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_return_status\"], \"turn\": 2}",
+      "timestamp": "2026-09-20T10:08:27.292375+00:00",
+      "provenance": "{}",
+      "duration_ms": 1388.2249680027599,
+      "usage_json": "{\"prompt_tokens\": 874, \"completion_tokens\": 71, \"total_tokens\": 945}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 8,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"live-61c33a2950e4\"}, \"tool\": \"get_return_status\"}",
+      "timestamp": "2026-09-20T10:08:27.296519+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 9,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"received\": true, \"version\": 1}, \"tool\": \"get_return_status\"}",
+      "timestamp": "2026-09-20T10:08:27.300589+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 10,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_refund_policy\"], \"turn\": 3}",
+      "timestamp": "2026-09-20T10:08:28.423092+00:00",
+      "provenance": "{}",
+      "duration_ms": 1118.2385050015,
+      "usage_json": "{\"prompt_tokens\": 941, \"completion_tokens\": 134, \"total_tokens\": 1075}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 11,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"live-61c33a2950e4\"}, \"tool\": \"get_refund_policy\"}",
+      "timestamp": "2026-09-20T10:08:28.436511+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 12,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"approval_limit_krw\": 500000, \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\"}, \"tool\": \"get_refund_policy\"}",
+      "timestamp": "2026-09-20T10:08:28.440384+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 13,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-20T10:08:28.637869+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 14,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"quote_refund\"], \"turn\": 4}",
+      "timestamp": "2026-09-20T10:08:29.633172+00:00",
+      "provenance": "{}",
+      "duration_ms": 991.850364000129,
+      "usage_json": "{\"prompt_tokens\": 1075, \"completion_tokens\": 79, \"total_tokens\": 1154}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 15,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"live-61c33a2950e4\"}, \"tool\": \"quote_refund\"}",
+      "timestamp": "2026-09-20T10:08:29.644821+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 16,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 89000, \"expires_at\": \"2026-09-20T10:13:29.647665+00:00\", \"order_version\": 1, \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\", \"quote_id\": \"quote-a1718e82c4\"}, \"tool\": \"quote_refund\"}",
+      "timestamp": "2026-09-20T10:08:29.650727+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 17,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-20T10:08:29.902456+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 18,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"issue_refund\"], \"turn\": 5}",
+      "timestamp": "2026-09-20T10:08:30.802946+00:00",
+      "provenance": "{}",
+      "duration_ms": 888.7461060003261,
+      "usage_json": "{\"prompt_tokens\": 1270, \"completion_tokens\": 84, \"total_tokens\": 1354}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 19,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"idempotency_key\": \"[REDACTED]\", \"order_id\": \"live-61c33a2950e4\", \"quote_id\": \"quote-a1718e82c4\"}, \"tool\": \"issue_refund\"}",
+      "timestamp": "2026-09-20T10:08:30.815317+00:00",
+      "provenance": "{\"idempotency_key\": \"context.idempotency_key\", \"order_id\": \"input.order_id\", \"quote_id\": \"steps.quote.quote_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 20,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 89000, \"status\": \"COMMITTED\"}, \"tool\": \"issue_refund\"}",
+      "timestamp": "2026-09-20T10:08:30.822892+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 21,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-20T10:08:31.032480+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 22,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"verify_refund\"], \"turn\": 6}",
+      "timestamp": "2026-09-20T10:08:32.973741+00:00",
+      "provenance": "{}",
+      "duration_ms": 1937.155444000382,
+      "usage_json": "{\"prompt_tokens\": 1368, \"completion_tokens\": 161, \"total_tokens\": 1529}"
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 23,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"live-61c33a2950e4\"}, \"tool\": \"verify_refund\"}",
+      "timestamp": "2026-09-20T10:08:32.977236+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 24,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 89000, \"committed\": true}, \"tool\": \"verify_refund\"}",
+      "timestamp": "2026-09-20T10:08:32.980339+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 25,
+      "kind": "execution.metrics",
+      "payload": "{\"latency_ms\": 8398.297, \"mock_decisions\": 0, \"model_calls\": 10, \"tokens\": \"[REDACTED]\", \"tool_calls\": 6}",
+      "timestamp": "2026-09-20T10:08:32.983129+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-5f318a0e32d69499690a",
+      "seq": 26,
+      "kind": "run.completed",
+      "payload": "{\"oracle_result\": null, \"status\": \"SUCCEEDED\"}",
+      "timestamp": "2026-09-20T10:08:32.985959+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    }
+  ]
+}
