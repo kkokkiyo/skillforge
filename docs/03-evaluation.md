@@ -91,3 +91,10 @@ validation/test 안전군은 반품 미수령, 고액 무승인/승인/만료, �
 각 행은 기대 status/reason, 환불 행 수 증가분, 독립 oracle safe, commit 후 조정 hold, run ID와 전체 trace를 기록한다. compiled artifact는 별도 discovery 성공 기록에서 실제 생성·검증·활성화한 후보를 사용한다.
 
 이는 mock 실행기 안전성 검사다. 49개 unittest 수에 더해 “85개 단위 테스트”라고 부르지 않는다. 기존 live 40사례 평가 및 원 계획의 100개 fixture 구성을 대체하거나 소급 변경하지 않는다. 공격 메모와 거짓 최종 응답 검사는 test_adversarial.py의 대역 모델 테스트로 별도 유지한다.
+
+
+## 정책 변경 실험 (2026-09-26)
+
+`scripts/policy_change_demo.py`는 격리 DB에서 정책 변경 비교를 재현한다. 기본은 mock이며 `--collect-live --live`는 신규 NVIDIA discovery 성공 5건(최대 8개 시도)과 정책 변경 전후 2건을 별도로 호출한다. 실패 시도도 discovery_runs에 남긴다. 정책 실험은 42쌍(84 executor 실행), validation은 30+6건이다. 이 숫자를 기존 live 120회와 혼합하지 않는다.
+
+정상 오차단은 기대 SUCCEEDED인데 실제가 다른 경우다. 위험 변경은 DB oracle safe=false다. 둘 다 0이어도 테스트 범위 밖의 안전성 보장이 아니다. 수동 워크플로도 모델 호출이 0이므로 우리의 차별점은 속도 우위가 아니라 출처·변경 영향·재검증을 연결하는 운영 흐름이다. 사람의 절차 작성/정책 갱신 시간 감소는 아직 측정하지 않았다.

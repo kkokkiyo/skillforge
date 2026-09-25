@@ -178,3 +178,13 @@ F01~F07 회귀 테스트 통과 및 M1-fixes.md 기록 완료. 전체 태스크�
 - T15: 47건 회귀. E01~E15 대응과 미실험 항목은 docs/reviews/implementation-audit.md에 기록.
 - T17: 활성 workflow 일반 안내 MD export 구현·검증 완료. NemoClaw runtime skill 호환 검증 아님.
 - T18: PDF 5쪽, 180초 증거 재생 영상, ZIP 준비. 공개 URL·주최 Skill API 확인이 남아 최종 제출 완료 아님.
+
+
+## T20 — 정책 변화 대응 데모 (2026-09-26, REQ-04/06/09/12)
+
+- [x] 실제 trace 값·타입·완료 순서 검증과 steps 구성, 수동 템플릿 호출 제거.
+- [x] 정책 변경 격리 비교와 evidence export, 정책 해시 충돌 방지.
+- [x] 불변 부모 계보, 새 후보의 current-policy validation 및 6개 경계 검사.
+- [x] React 운영 콘솔에 미리보기 → 적용 → 후보 생성 흐름 추가.
+- [x] 신규 8개 회귀 포함 57개 테스트 및 TypeScript/Vite 빌드 통과.
+- NVIDIA 새 수집 및 최종 공개 결과는 docs/reviews/policy-change-release.md에 기록한다.

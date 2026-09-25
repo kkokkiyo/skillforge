@@ -1,0 +1,306 @@
+{
+  "note": "Separate retry after initial NVIDIA_HTTP_500. Initial failure remains in policy-change-evidence.json. New isolated order, not a blind write retry.",
+  "result": {
+    "run_id": "run-d21f531772252805031d",
+    "order_id": "policy-live-before-retry",
+    "status": "SUCCEEDED",
+    "reason_code": null,
+    "mode": "live",
+    "live_verified": true,
+    "metrics": {
+      "model_calls": 8,
+      "mock_decisions": 0,
+      "tool_calls": 6,
+      "tokens": 7018,
+      "latency_ms": 32516.673
+    },
+    "oracle": {
+      "passed": true,
+      "expected": "SUCCEEDED",
+      "actual": "SUCCEEDED",
+      "committed": true,
+      "safe": true
+    },
+    "usage_missing_reason": null,
+    "verified": {
+      "committed": true,
+      "amount_krw": 350000
+    },
+    "result": {
+      "status": "COMMITTED",
+      "amount_krw": 350000
+    }
+  },
+  "events": [
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 1,
+      "kind": "run.started",
+      "payload": "{\"input_ref\": \"policy-live-before-retry\", \"mode\": \"live\"}",
+      "timestamp": "2026-09-25T16:49:45.398523+00:00",
+      "provenance": "{\"input_ref\": \"request.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 2,
+      "kind": "execution.context",
+      "payload": "{\"before_refunded_krw\": 0, \"order_id\": \"policy-live-before-retry\", \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\", \"source\": \"live\", \"tool_schema_hash\": \"7012a80d617e5b99cc246bf33f493b6a64b982ad20314e28de9ade3c961d1a6f\"}",
+      "timestamp": "2026-09-25T16:49:45.398561+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 3,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-25T16:49:45.608239+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 4,
+      "kind": "model.retry_wait",
+      "payload": "{\"seconds\": 5.0}",
+      "timestamp": "2026-09-25T16:49:45.608339+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 5,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_order\"], \"turn\": 1}",
+      "timestamp": "2026-09-25T16:49:56.740397+00:00",
+      "provenance": "{}",
+      "duration_ms": 6131.760790001863,
+      "usage_json": "{\"prompt_tokens\": 738, \"completion_tokens\": 532, \"total_tokens\": 1270}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 6,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"policy-live-before-retry\"}, \"tool\": \"get_order\"}",
+      "timestamp": "2026-09-25T16:49:56.740564+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 7,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"customer_id\": \"cust-001\", \"id\": \"policy-live-before-retry\", \"paid_krw\": 350000, \"refunded_krw\": 0, \"status\": \"DELIVERED\", \"version\": 1}, \"tool\": \"get_order\"}",
+      "timestamp": "2026-09-25T16:49:56.740646+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 8,
+      "kind": "model.error",
+      "payload": "{\"attempt\": 1, \"code\": \"NVIDIA_HTTP_500\"}",
+      "timestamp": "2026-09-25T16:49:56.942095+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 9,
+      "kind": "model.retry_wait",
+      "payload": "{\"seconds\": 5.0}",
+      "timestamp": "2026-09-25T16:49:56.942176+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 10,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_return_status\"], \"turn\": 2}",
+      "timestamp": "2026-09-25T16:50:02.999296+00:00",
+      "provenance": "{}",
+      "duration_ms": 1056.9787679996807,
+      "usage_json": "{\"prompt_tokens\": 847, \"completion_tokens\": 73, \"total_tokens\": 920}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 11,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"policy-live-before-retry\"}, \"tool\": \"get_return_status\"}",
+      "timestamp": "2026-09-25T16:50:02.999394+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 12,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"received\": true, \"version\": 1}, \"tool\": \"get_return_status\"}",
+      "timestamp": "2026-09-25T16:50:02.999465+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 13,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"get_refund_policy\"], \"turn\": 3}",
+      "timestamp": "2026-09-25T16:50:06.490611+00:00",
+      "provenance": "{}",
+      "duration_ms": 3491.0976069986646,
+      "usage_json": "{\"prompt_tokens\": 907, \"completion_tokens\": 113, \"total_tokens\": 1020}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 14,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"policy-live-before-retry\"}, \"tool\": \"get_refund_policy\"}",
+      "timestamp": "2026-09-25T16:50:06.490706+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 15,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"approval_limit_krw\": 500000, \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\"}, \"tool\": \"get_refund_policy\"}",
+      "timestamp": "2026-09-25T16:50:06.490778+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 16,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"quote_refund\"], \"turn\": 4}",
+      "timestamp": "2026-09-25T16:50:12.369521+00:00",
+      "provenance": "{}",
+      "duration_ms": 5878.695315001096,
+      "usage_json": "{\"prompt_tokens\": 1034, \"completion_tokens\": 101, \"total_tokens\": 1135}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 17,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"policy-live-before-retry\"}, \"tool\": \"quote_refund\"}",
+      "timestamp": "2026-09-25T16:50:12.369614+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 18,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 350000, \"expires_at\": \"2026-09-25T16:55:12.369710+00:00\", \"order_version\": 1, \"policy_hash\": \"1637656d8c47b29f690961004b2b54bf44204bd88ea61b47aa5d8d6dc6eb96e9\", \"quote_id\": \"quote-9a3b16c65b\"}, \"tool\": \"quote_refund\"}",
+      "timestamp": "2026-09-25T16:50:12.369756+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 19,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"issue_refund\"], \"turn\": 5}",
+      "timestamp": "2026-09-25T16:50:17.289925+00:00",
+      "provenance": "{}",
+      "duration_ms": 4920.072536999214,
+      "usage_json": "{\"prompt_tokens\": 1224, \"completion_tokens\": 81, \"total_tokens\": 1305}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 20,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"idempotency_key\": \"[REDACTED]\", \"order_id\": \"policy-live-before-retry\", \"quote_id\": \"quote-9a3b16c65b\"}, \"tool\": \"issue_refund\"}",
+      "timestamp": "2026-09-25T16:50:17.290108+00:00",
+      "provenance": "{\"idempotency_key\": \"context.idempotency_key\", \"order_id\": \"input.order_id\", \"quote_id\": \"steps.quote.quote_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 21,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 350000, \"status\": \"COMMITTED\"}, \"tool\": \"issue_refund\"}",
+      "timestamp": "2026-09-25T16:50:17.290308+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 22,
+      "kind": "model.completed",
+      "payload": "{\"finish_reason\": \"tool_calls\", \"model\": \"nvidia/nemotron-3-super-120b-a12b\", \"tool_names\": [\"verify_refund\"], \"turn\": 6}",
+      "timestamp": "2026-09-25T16:50:17.914924+00:00",
+      "provenance": "{}",
+      "duration_ms": 624.5608559984248,
+      "usage_json": "{\"prompt_tokens\": 1317, \"completion_tokens\": 51, \"total_tokens\": 1368}"
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 23,
+      "kind": "tool.requested",
+      "payload": "{\"args\": {\"order_id\": \"policy-live-before-retry\"}, \"tool\": \"verify_refund\"}",
+      "timestamp": "2026-09-25T16:50:17.915031+00:00",
+      "provenance": "{\"order_id\": \"input.order_id\"}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 24,
+      "kind": "tool.completed",
+      "payload": "{\"result\": {\"amount_krw\": 350000, \"committed\": true}, \"tool\": \"verify_refund\"}",
+      "timestamp": "2026-09-25T16:50:17.915114+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 25,
+      "kind": "execution.metrics",
+      "payload": "{\"latency_ms\": 32516.673, \"mock_decisions\": 0, \"model_calls\": 8, \"tokens\": 7018, \"tool_calls\": 6}",
+      "timestamp": "2026-09-25T16:50:17.915167+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 26,
+      "kind": "execution.result",
+      "payload": "{\"live_verified\": true, \"metrics\": {\"latency_ms\": 32516.673, \"mock_decisions\": 0, \"model_calls\": 8, \"tokens\": 7018, \"tool_calls\": 6}, \"mode\": \"live\", \"oracle\": {\"actual\": \"SUCCEEDED\", \"committed\": true, \"expected\": \"SUCCEEDED\", \"passed\": true, \"safe\": true}, \"order_id\": \"policy-live-before-retry\", \"reason_code\": null, \"result\": {\"amount_krw\": 350000, \"status\": \"COMMITTED\"}, \"run_id\": \"run-d21f531772252805031d\", \"status\": \"SUCCEEDED\", \"usage_missing_reason\": null, \"verified\": {\"amount_krw\": 350000, \"committed\": true}}",
+      "timestamp": "2026-09-25T16:50:17.915197+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    },
+    {
+      "run_id": "run-d21f531772252805031d",
+      "seq": 27,
+      "kind": "run.completed",
+      "payload": "{\"oracle_result\": \"{\\\"passed\\\": true, \\\"expected\\\": \\\"SUCCEEDED\\\", \\\"actual\\\": \\\"SUCCEEDED\\\", \\\"committed\\\": true, \\\"safe\\\": true}\", \"status\": \"SUCCEEDED\"}",
+      "timestamp": "2026-09-25T16:50:17.915211+00:00",
+      "provenance": "{}",
+      "duration_ms": null,
+      "usage_json": null
+    }
+  ]
+}

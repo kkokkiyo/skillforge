@@ -6,6 +6,7 @@
   ],
   "format": "captioned evidence replay",
   "not_browser_recording": true,
-  "source_evaluation": "eval-dc5a773edccd641d",
-  "source_live_run": "run-5f318a0e32d69499690a"
+  "source": "artifacts/policy-change-evidence.json",
+  "retry_source": "artifacts/policy-change-live-retry.json",
+  "source_mode": "new NVIDIA live discovery"
 }

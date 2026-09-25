@@ -26,6 +26,7 @@ from .app import (
 from .engine import WorkflowService, execute, digest
 from .evaluation import benchmark
 from .router import route_text
+from .governance import PolicyLab
 
 load_env()
 
@@ -49,7 +50,12 @@ class ApprovalBody(StrictBody):
 
 
 class CaseBody(StrictBody):
-    kind: Literal["normal", "high", "unreceived"] = "normal"
+    kind: Literal["normal", "high", "unreceived", "policy-change"] = "normal"
+
+
+class PolicyPreviewBody(StrictBody):
+    workflow_id: str = Field(min_length=1, max_length=100)
+    approval_limit_krw: int = Field(ge=2, le=100000000)
 
 
 class ActivateBody(StrictBody):
@@ -63,6 +69,7 @@ def create_app(db: Database | None = None) -> FastAPI:
             Path(path).parent.mkdir(parents=True, exist_ok=True)
         db = Database(path)
     service = WorkflowService(db)
+    policy_lab = PolicyLab(service)
     pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="refund")
     jobs: dict[str, dict] = {}
     lock = threading.RLock()
@@ -396,7 +403,7 @@ def create_app(db: Database | None = None) -> FastAPI:
             db,
             {
                 "order_id": oid,
-                "amount_krw": 600000 if body.kind == "high" else 89000,
+                "amount_krw": 600000 if body.kind == "high" else 350000 if body.kind == "policy-change" else 89000,
                 "return_received": body.kind != "unreceived",
             },
         )
@@ -446,13 +453,37 @@ def create_app(db: Database | None = None) -> FastAPI:
             db.conn.execute("UPDATE workflows SET state='DISABLED' WHERE id=?", (wid,))
         return service.get(wid)
 
+    @app.get("/api/policy")
+    def current_policy():
+        return policy_lab.current()
+
+    @app.post("/api/policy/preview")
+    def preview_policy(body: PolicyPreviewBody, x_operator_session: str | None = Header(default=None)):
+        operator(x_operator_session)
+        return policy_lab.preview(body.workflow_id, body.approval_limit_krw)
+
+    @app.get("/api/policy/reviews/{rid}")
+    def policy_review(rid: str):
+        return policy_lab.get(rid)
+
+    @app.post("/api/policy/reviews/{rid}/apply")
+    def apply_policy(rid: str, x_operator_session: str | None = Header(default=None)):
+        operator(x_operator_session)
+        return policy_lab.apply(rid)
+
+    @app.post("/api/workflows/{wid}/rebase")
+    def rebase_workflow(wid: str, x_operator_session: str | None = Header(default=None)):
+        operator(x_operator_session)
+        return policy_lab.rebase(wid)
+
     @app.post("/api/policy/bump")
     def bump(x_operator_session: str | None = Header(default=None)):
         operator(x_operator_session)
-        ph = digest({"revision": secrets.token_hex(8), "limit": 500000})
         with db.transaction():
+            limit = policy_lab.current()["approval_limit_krw"]
+            ph = digest({"revision": secrets.token_hex(8), "limit": limit})
             db.conn.execute("UPDATE policies SET active=0")
-            db.conn.execute("INSERT INTO policies VALUES (?,500000,1)", (ph,))
+            db.conn.execute("INSERT INTO policies VALUES (?,?,1)", (ph, limit))
         return {"policy_hash": ph, "workflows": service.list()}
 
     @app.get("/api/evaluations")

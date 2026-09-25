@@ -152,3 +152,14 @@ POST는 중복 클릭을 방지하는 request key를 받는다. schema 오류 42
 유닛: 바인딩·DSL·정책·승격. 통합: MCP 공통 경로·NAT trace·DB 거래·승인 후 재검증. 상태 기반/속성 테스트: 임의 반복 요청에도 누적 환불≤결제액, 승인 없는 고액 환불 없음. E2E: 정상→후보→활성→재사용, 중복 차단, 정책 변경. 평가 데이터와 지표는 docs/03-evaluation.md에 단일 정의한다.
 
 로그와 UI에서 모델/버전/hash/run ID를 추적한다. 격리 실험은 실제 차단 로그가 있어야 통과한다. mock 테스트가 통과해도 live 통합·실성능 완료로 표시하지 않는다.
+
+
+## 2026-09-26 구현 보강: 출처 컴파일과 정책 실험
+
+`compiler.derive_steps`는 실제 requested/completed 이벤트를 순서대로 읽어 typed symbol table을 구성한다. 주문 입력, 이전 완료 quote 출력, trusted 실행 컨텍스트만 허용한다. provenance 주장과 실제 값·타입·시간 순서가 일치해야 한다. 서버 idempotency key는 trace에서 마스킹되므로 문자열을 복원하지 않고 서버 run context로 재생성한다. 최종 oracle가 없는 구형 trace는 자동 편입하지 않는다.
+
+정규화한 단계 JSON 해시와 source mode로 버킷을 묶고 서로 다른 주문 5건을 요구한다. 후보의 steps는 관측 기록에서 구성한다. `manual_workflow`를 호출하지 않는다. 지원 도구 순서는 여전히 환불 도메인의 6단계 한 종류다. 범용 프로그램 합성이나 DAG 학습이 아니다.
+
+`PolicyLab`은 validation 30개 + 이전·새 기준 경계 12개를 각각 격리 SQLite에서 실행한다. 42쌍은 산업 대표 표본이 아니며 경계군 사이 일부 금액이 반복된다. 예상 판정은 fixture와 정책 임계값에서 계산하며 실제 결과를 정답으로 쓰지 않는다. 전체 이전 절차를 무효화하는 보수적 전략을 사용한다.
+
+`policy_reviews`에 보고서를 보존하고 적용 시 base policy hash를 compare-and-swap한다. 새 후보는 parent_artifact_hash/origin_policy_hash를 보존한다. 이것은 기존 도구 절차의 재검증이지 새 정책에서 모델이 학습한 기록이라는 주장이 아니다. 검증 중 정책 변경은 마지막 거래에서 거절한다. 구형 승인도 정책 hash binding 때문에 새 정책에 사용할 수 없다.

@@ -1,219 +1,57 @@
-"""180-second captioned replay of saved evidence, explicitly not a UI recording."""
-
-import json, sys, subprocess
+"""Captioned evidence replay, deliberately labelled as not a screen recording."""
 from pathlib import Path
+import json, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont
-
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / ".media-runtime"))
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'.media-runtime'))
 import imageio_ffmpeg
-
-OUT = ROOT / "output/video"
-OUT.mkdir(parents=True, exist_ok=True)
-frames = ROOT / "tmp/video-frames"
-frames.mkdir(parents=True, exist_ok=True)
-F = "C:/Windows/Fonts/malgun.ttf"
-B = "C:/Windows/Fonts/malgunbd.ttf"
-font = lambda size, b=False: ImageFont.truetype(B if b else F, size)
-FG = "#e8f0e9"
-MUTED = "#a1b1a8"
-LIME = "#b6ed64"
-DARK = "#0b1410"
-report = json.loads((ROOT / "artifacts/eval-dc5a773edccd641d/report.json").read_text())
-workflow = json.loads((ROOT / "artifacts/workflow-evidence.json").read_text())
-live = json.loads((ROOT / "artifacts/live-evidence.json").read_text())
-labels = ["주문 확인", "반품 수령", "정책 조회", "견적 생성", "환불 확정", "DB 검증"]
-sections = [
-    (
-        "SkillForge",
-        "실행 기록에서 배우는 안전한 업무 자동화",
-        [
-            "반복 요청을 매번 처음부터 추론하는 부담",
-            "성공한 실행 기록에서 절차 후보를 유도",
-            "별도 검증과 운영자 활성화 후 재사용",
-            "합성 주문 · 실제 결제 없음",
-        ],
-    ),
-    (
-        "실제 Nemotron 실행",
-        "공개 도구 호출과 DB 상태를 함께 확인",
-        [
-            "model: nvidia/nemotron-3-super-120b-a12b",
-            "run: " + live["result"]["run_id"],
-            "업무 도구 6회 · 독립 oracle 통과",
-            "단일 실행 사례이며 평균 성능이 아닙니다.",
-        ],
-    ),
-    (
-        "기록 → 후보 → 검증",
-        "독립 성공 사례 5건, Validation 30건",
-        [
-            workflow["id"],
-            "출처: live / 과거 주문 ID를 상수로 복사하지 않음",
-            "동일한 도구 순서 + 입력·이전 출력 참조",
-            "검증된 artifact hash와 현재 정책을 확인",
-        ],
-    ),
-    (
-        "정책 경계는 그대로",
-        "공통 gateway로 쓰기를 검증",
-        [
-            "47개 회귀 테스트가 통과한 시점의 증거",
-            "500,000원 이상: 운영자 단회 승인",
-            "소유권·반품 수령·중복·최신 상태 검사",
-            "쓰기 후 오류: 보류, 조회·조정 후 재개",
-        ],
-    ),
-    (
-        "같은 40건, 세 가지 경로",
-        "실측 결과와 실패를 함께 공개",
-        [
-            "A ReAct: 34 / 40 · 모델 호출 244회",
-            "B 수동 workflow: 40 / 40 · 모델 호출 0회",
-            "C 생성 workflow: 40 / 40 · 모델 호출 0회",
-            "세 경로 모두 unsafe commit 0건",
-        ],
-    ),
-    (
-        "범위와 다음 단계",
-        "재현 가능한 증거를 남깁니다.",
-        [
-            "in-memory SQLite executor 비교 · 각 군 1회 반복",
-            "자연어 router·실결제·운영자 대기 비용 제외",
-            "OpenShell 격리와 대회 Skill API 세부 요건 미확정",
-            "GitHub·영상 공개 URL은 사용자 확정 후 반영",
-        ],
-    ),
+e=json.loads((ROOT/'artifacts/policy-change-evidence.json').read_text(encoding='utf-8'))
+retry=json.loads((ROOT/'artifacts/policy-change-live-retry.json').read_text(encoding='utf-8'))
+out=ROOT/'output/video';out.mkdir(parents=True,exist_ok=True)
+frames=ROOT/'tmp/policy-video';frames.mkdir(parents=True,exist_ok=True)
+fontroot=Path('C:/Windows/Fonts') if Path('C:/Windows/Fonts').exists() else Path('/mnt/c/Windows/Fonts')
+def font(size,bold=False):return ImageFont.truetype(str(fontroot/('malgunbd.ttf' if bold else 'malgun.ttf')),size)
+sections=[
+ ('정책이 바뀌면, 자동화도 다시 검증','SkillForge / 검증 가능한 업무 자동화',
+  ['반복 환불을 자동화해도 정책과 승인 기준은 변합니다.','운영자는 어떤 사례가 왜 달라지는지 알아야 합니다.','실행 출처 → 독립 검증 → 변경 영향 → 재승격','합성 커머스 주문 · 실제 결제 없음']),
+ ('성공 경험을 근거 있는 절차로','새 NVIDIA discovery 성공 5건에서 구성',
+  ['Nemotron이 6개 업무 도구를 순서대로 호출합니다.','이전 quote 출력과 실제 인자의 값·타입·순서를 대조합니다.','과거 주문 ID 대신 입력과 이전 출력 참조를 사용합니다.','지원 범위는 환불 6단계 · 범용 프로그램 학습 아님']),
+ ('검증을 통과한 버전만 활성화','Validation 30건 + 승인 경계 6건',
+  ['생성에 사용하지 않은 사례를 독립 DB에서 재실행합니다.','도구 오류·중복·승인·정책 경계는 공통 gateway로 검사합니다.','운영자가 artifact와 보고서를 확인하고 활성화합니다.','회귀 테스트 57건 통과 · 별도 안전 행렬 36/36']),
+ ('35만원 환불의 판단이 달라집니다','승인 기준 50만원 → 30만원',
+  ['변경 전: 자동 환불 가능 / 변경 후: 운영자 승인 필요',f'42쌍의 합성 비교 중 {e["comparison"]["changed_count"]}개 사례 판정 변화',f'위험 변경 {e["comparison"]["unsafe_count"]} · 정상 환불 오차단 {e["comparison"]["false_block_count"]}', '미리보기는 운영 주문을 환불하지 않습니다.']),
+ ('출처를 보존하고, 다시 검증합니다','기존 절차 STALE → 새 후보 → 검증 → 활성화',
+  ['정책 적용 시 이전 버전의 절차 재사용을 중지합니다.','부모 hash와 원래 실행 출처를 새 후보에 남깁니다.','새 정책에서 분리 검증·경계 검사를 다시 통과해야 합니다.','35만원 주문: 승인 대기 → 단회 승인 → 1회 환불']),
+ ('실제 증거와 한계를 함께 공개','github.com/kkokkiyo/skillforge',
+  ['신규 live 5개 출처 성공 · 변경 후 승인 대기 확인','변경 전 live: HTTP 500 실패 보존 → 별도 재실행 '+retry['result']['status'], 'OpenShell OS 격리·대회 Skill API 기준은 미확인','42쌍은 모의 비교입니다. 실서비스 안전성 보장이 아닙니다.'])
 ]
-
-
-def wrap(draw, text, width, f):
-    lines = []
-    cur = ""
+def wrap(draw,text,width,f):
+    lines=[];line=''
     for char in text:
-        if draw.textlength(cur + char, font=f) > width:
-            lines.append(cur)
-            cur = char
-        else:
-            cur += char
-    if cur:
-        lines.append(cur)
-    return lines
-
-
-for section, (title, subtitle, lines) in enumerate(sections):
-    for step in range(6):
-        im = Image.new("RGB", (1280, 720), DARK)
-        d = ImageDraw.Draw(im)
-        d.text((66, 38), "TRACE MAKERS / SKILLFORGE", font=font(17, True), fill=LIME)
-        d.text((66, 92), title, font=font(46, True), fill=FG)
-        d.text((66, 157), subtitle, font=font(24), fill=MUTED)
-        if section in {0, 1}:
-            for i, label in enumerate(labels):
-                x = 66 + i * 195
-                y = 235
-                d.rounded_rectangle(
-                    (x, y, x + 180, y + 85),
-                    radius=10,
-                    fill="#253921" if i <= step else "#15211b",
-                    outline=LIME if i == step else "#344336",
-                    width=2,
-                )
-                d.text((x + 16, y + 13), f"{i+1:02}", font=font(15, True), fill=LIME)
-                d.text((x + 16, y + 42), label, font=font(20, True), fill=FG)
-            y = 362
-        else:
-            y = 237
-        for line in lines:
-            for part in wrap(d, line, 1130, font(24)):
-                d.text((70, y), part, font=font(24), fill=FG)
-                y += 36
-            y += 15
-        if section == 4:
-            d.text(
-                (70, 500),
-                "A 실패: provider HTTP 500 5건 + 견적 참조 오류 1건",
-                font=font(20),
-                fill="#efc76c",
-            )
-            d.text(
-                (70, 536),
-                "수동 자동화보다 빠르다는 주장은 하지 않습니다.",
-                font=font(20),
-                fill=MUTED,
-            )
-        d.line((66, 620, 1214, 620), fill="#344336", width=1)
-        d.text(
-            (66, 641),
-            "실제 실행 결과를 시각화한 재생 자료 · 브라우저 화면 녹화 아님",
-            font=font(17),
-            fill=MUTED,
-        )
-        position = section * 6 + step + 1
-        d.rectangle((0, 707, int(1280 * position / 36), 720), fill=LIME)
-        d.text((1115, 38), f"{section+1:02} / 06", font=font(18), fill=MUTED)
-        im.save(frames / f"{position:02}.png")
-manifest = frames / "concat.txt"
-manifest.write_text(
-    "".join(f"file '{i:02}.png'\nduration 5\n" for i in range(1, 37))
-    + "file '36.png'\n",
-    encoding="utf-8",
-)
-video = OUT / "SkillForge-evidence-walkthrough.mp4"
-subprocess.run(
-    [
-        imageio_ffmpeg.get_ffmpeg_exe(),
-        "-y",
-        "-hide_banner",
-        "-loglevel",
-        "error",
-        "-f",
-        "concat",
-        "-safe",
-        "0",
-        "-i",
-        str(manifest),
-        "-t",
-        "180",
-        "-vf",
-        "fps=24",
-        "-c:v",
-        "libx264",
-        "-preset",
-        "fast",
-        "-crf",
-        "23",
-        "-pix_fmt",
-        "yuv420p",
-        "-movflags",
-        "+faststart",
-        str(video),
-    ],
-    check=True,
-)
-reader = imageio_ffmpeg.read_frames(str(video))
-meta = next(reader)
-reader.close()
-assert 179.9 <= meta["duration"] <= 180.1
-(OUT / "video-manifest.json").write_text(
-    json.dumps(
-        {
-            "duration_seconds": meta["duration"],
-            "size": meta["size"],
-            "format": "captioned evidence replay",
-            "not_browser_recording": True,
-            "source_evaluation": report["id"],
-            "source_live_run": live["result"]["run_id"],
-        },
-        indent=2,
-    )
-)
-print(
-    json.dumps(
-        {
-            "video": str(video),
-            "duration": meta["duration"],
-            "bytes": video.stat().st_size,
-        }
-    )
-)
+        if draw.textlength(line+char,font=f)>width:lines.append(line);line=''
+        line+=char
+    return lines+[line]
+for i,(title,subtitle,lines) in enumerate(sections,1):
+    im=Image.new('RGB',(1280,720),'#0b1410');d=ImageDraw.Draw(im)
+    d.text((64,38),'SKILLFORGE / POLICY-AWARE AUTOMATION',font=font(17,True),fill='#b6ed64')
+    d.text((64,106),title,font=font(39,True),fill='#e8f0e9')
+    d.text((64,174),subtitle,font=font(25),fill='#a1b1a8')
+    y=255
+    for j,line in enumerate(lines,1):
+        d.text((64,y),f'0{j}',font=font(20,True),fill='#b6ed64')
+        for segment in wrap(d,line,1050,font(25)):
+            d.text((120,y),segment,font=font(25),fill='#e8f0e9');y+=38
+        y+=24
+    d.line((64,612,1216,612),fill='#344336',width=1)
+    d.text((64,640),'저장된 실제 실행 증거의 시각화 · 브라우저 화면 녹화 아님',font=font(19),fill='#a1b1a8')
+    d.text((1135,38),f'{i:02} / 06',font=font(17),fill='#a1b1a8')
+    d.rectangle((0,707,int(1280*i/6),720),fill='#b6ed64')
+    im.save(frames/f'{i:02}.png')
+manifest=frames/'concat.txt'
+manifest.write_text(''.join(f"file '{i:02}.png'\nduration 30\n" for i in range(1,7))+"file '06.png'\n",encoding='utf-8')
+video=out/'SkillForge-evidence-walkthrough.mp4'
+subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-y','-hide_banner','-loglevel','error','-f','concat','-safe','0','-i',str(manifest),'-t','180','-vf','fps=24','-c:v','libx264','-preset','fast','-crf','23','-pix_fmt','yuv420p','-movflags','+faststart',str(video)],check=True)
+reader=imageio_ffmpeg.read_frames(str(video));meta=next(reader);reader.close()
+assert 179.9<=meta['duration']<=180.1
+(out/'video-manifest.json').write_text(json.dumps({'duration_seconds':meta['duration'],'size':meta['size'],'format':'captioned evidence replay','not_browser_recording':True,'source':'artifacts/policy-change-evidence.json','retry_source':'artifacts/policy-change-live-retry.json','source_mode':e['source']},indent=2),encoding='utf-8')
+print(json.dumps({'duration':meta['duration'],'bytes':video.stat().st_size}))

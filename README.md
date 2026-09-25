@@ -1,6 +1,6 @@
 # SkillForge
 
-**에이전트의 실행 기록을 검증된 워크플로로.** 임시 팀명 TraceMakers.
+**정책이 바뀌면, 자동화의 근거도 다시 검증합니다.** 임시 팀명 TraceMakers.
 
 환불 에이전트의 독립 성공 기록에서 동일한 전체 도구 순서와 인자 참조를 확인하고, 별도 검증과 운영자 활성화를 거쳐 새 주문에 재사용하는 로컬 데모입니다. 합성 주문만 사용하며 실제 결제는 없습니다.
 
@@ -17,7 +17,7 @@ python3 setup_runtime.py
 .runtime/bin/python -m backend.cli serve
 ```
 
-브라우저 `http://127.0.0.1:8090`을 엽니다. 다른 포트는 `PORT=8096 .runtime/bin/python -m backend.cli serve`로 설정합니다. 현재 실행 중인 최신 데모 주소는 8096입니다.
+브라우저 `http://127.0.0.1:8090`을 엽니다. 다른 포트는 `PORT=8096 .runtime/bin/python -m backend.cli serve`로 설정합니다. 포트 번호는 실행 환경에 맞게 선택합니다.
 
 처음 실행할 때 운영자 토큰이 없으면 `.env.local`에 임의 토큰을 생성합니다. 해당 파일의 `SKILLFORGE_OPERATOR_SESSION` 값을 콘솔의 비밀번호 입력에 넣고 연결합니다. 토큰은 콘솔 메모리에만 남고 새로고침하면 해제됩니다. API 키와 운영자 토큰은 서로 다릅니다.
 
@@ -50,9 +50,11 @@ pnpm run build
 3. 워크플로 랩에서 출처 기록·DSL·Validation 결과 확인.
 4. 검증 후보 활성화 -> 새 정상 주문을 auto 경로로 실행.
 5. 고액 승인 -> 승인 발급·재개 -> 중복 시 차단 확인.
-6. 마지막에 정책 변경 -> 기존 워크플로 STALE 확인.
+6. 정책 영향 미리보기: 승인 기준 500,000원 → 300,000원. 35만원 주문이 자동 환불에서 승인 필요로 바뀌는지 확인.
+7. 정책 적용 → 이전 절차 STALE → 새 정책 후보 → 분리·경계 검증 → 활성화.
+8. 새 35만원 반품을 실행하고 운영자 단회 승인 후 재개.
 
-정책 변경 후에는 현재 정책에 맞는 새 성공 기록/후보/검증이 필요합니다. 이전 주문을 다시 정상 환불 데모에 사용하면 중복 차단됩니다.
+정책 기준만 바뀌면 이전 검증 절차의 출처·부모 해시를 보존한 새 후보를 생성하고 재검증합니다. 도구 계약 변경은 새 기록을 수집해야 합니다. 이전 주문을 다시 정상 환불 데모에 사용하면 중복 차단됩니다.
 
 ## 검증 명령
 
@@ -72,7 +74,7 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 - 실제 Nemotron 및 NAT custom workflow 실행, 실제 MCP stdio 통신 증거: `artifacts/*-evidence.json`.
 - 생성 30 / 검증 30 / 테스트 40 사례는 합성 환불 상태이며 산업 데이터 일반화 증거가 아닙니다.
 - 초기 live A/B/C 평가에서 429가 많았습니다. 실패도 보존하며 이를 속도 개선 근거로 쓰지 않습니다.
-- 47개 회귀 테스트 및 별도 가상환경에서 제출 ZIP 설치·테스트·빌드 UI 제공 재현 통과. 최종 결과는 `docs/reviews/implementation-audit.md`에서 확인합니다.
+- 57개 회귀 테스트 및 별도 가상환경에서 제출 ZIP 설치·테스트·빌드 UI 제공 재현 통과. 최종 결과는 `docs/reviews/implementation-audit.md`에서 확인합니다.
 - NAT는 custom workflow를 호스팅합니다. 자체 bounded loop를 NAT 기본 ReAct agent라고 소개하지 않습니다.
 - OpenShell OS 격리와 대회의 ‘Skill API’ 세부 요건은 미확정입니다. 앱의 업무 정책 검사를 OS 격리라고 표시하지 않습니다.
 - 루프백 개발용 인증입니다. 인터넷 배포나 멀티테넌트 운영용 인증이 아닙니다.
@@ -83,3 +85,13 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 
 공개 GitHub 저장소: https://github.com/kkokkiyo/skillforge. 영상은 위 링크에서 다운로드할 수 있습니다. API 키·운영자 토큰·개인정보는 공개 저장소에 포함하지 않습니다.
 
+
+## 정책 변화에 대응하는 자동화
+
+핵심 흐름은 `기록 → 출처 바인딩 → 독립 검증 → 활성화 → 정책 영향 비교 → 재검증`입니다. 범용 에이전트 메모리나 세계 최초 자동화라는 주장을 하지 않습니다. 환불 운영자가 어떤 변경으로 어떤 사례의 판정이 바뀌는지 확인할 수 있게 만든 데모입니다.
+
+- [새 구현과 검증](docs/reviews/policy-change-release.md)
+- [최신 데모 대본](submission/policy-change-pitch.md)
+- 재현: `PYTHONPATH=. .runtime/bin/python scripts/policy_change_demo.py` (mock)
+- 실제 NVIDIA 재현: 위 명령에 `--collect-live --live` 추가. API 호출과 사용량이 발생합니다.
+- 기존 A/B/C 수치는 이전 버전의 pilot입니다. 새 정책 실험과 동일한 측정으로 합치지 않습니다.

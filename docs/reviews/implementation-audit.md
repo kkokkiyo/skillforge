@@ -61,3 +61,8 @@
 최종 실행 결과: 전체 회귀 **49건 통과**, 별도 환경 ZIP 설치에서도 **49건 및 빌드 UI 제공 재현 통과**. PDF·영상의 47건은 이전 검증 시점 수치이며, 최신 수치는 이 보고서와 reproduction-evidence.json을 따른다.
 
 추가 안전 사례 행렬: scripts/safety_matrix.py에서 12종×3경로 **36/36 통과**. 각 사례의 DB delta·reason·oracle·hold·trace를 보존했다. 기존 49개 회귀 및 live120회 pilot과 분모를 분리한다. 상세는 docs/03-evaluation.md 및 artifacts/safety-matrix.json 참조.
+
+
+## 2026-09-26 정책 변경 릴리스
+
+최신 결과는 [policy-change-release.md](policy-change-release.md)를 따른다. 회귀 57/57, 안전 행렬 36/36, 새 ZIP 별도 환경 57건/UI 재현 통과. 출처 컴파일러의 고정 템플릿 호출을 제거하고 정책 영향 미리보기·불변 계보·current-policy 재검증·콘솔 흐름을 추가했다. 신규 NVIDIA source 5건 성공, 변경 후 승인 대기, 변경 전 HTTP 500 실패와 별도 성공 재실행을 모두 기록했다. 기존 9/21 수치와 live pilot은 당시 버전의 이력이다.

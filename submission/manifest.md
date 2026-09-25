@@ -1,27 +1,24 @@
-# 제출 manifest
+# 제출 manifest — 2026-09-26
 
-- 팀명: TraceMakers
 - 서비스명: SkillForge
-- 추천 저장소명: skillforge
-- GitHub: https://github.com/kkokkiyo/skillforge (공개 소스·실행 증거 업로드 및 비로그인 조회 확인)
-- 영상 URL: https://github.com/kkokkiyo/skillforge/blob/main/output/video/SkillForge-evidence-walkthrough.mp4
-- 모델: nvidia/nemotron-3-super-120b-a12b
-- 실제 비교 평가: eval-dc5a773edccd641d, 합성 Test 40건 x A/B/C, 1회 반복
-- 이전 실패가 많은 평가: eval-1fbaadfc4c465a19, 삭제하지 않고 보존
-- 실제 모델/NAT/MCP 증거: artifacts의 evidence JSON
-- 공개 대상 파일의 SHA-256: source-manifest.json
-- 팀원 개인정보와 .env/.enc.API/운영자 토큰/SQLite DB는 제출 묶음에 포함하지 않음
-- 로컬 실행 주소는 심사자용 배포 URL이 아님
+- 팀명: TraceMakers (임시안; 실제 신청서와 파일명을 일치시킬 것)
+- GitHub: https://github.com/kkokkiyo/skillforge
+- 영상: https://github.com/kkokkiyo/skillforge/blob/main/output/video/SkillForge-evidence-walkthrough.mp4
+- 폼 업로드: output/pdf/NVIDIA 해커톤_TraceMakers_SkillForge.pdf (4쪽)
+- 검토 묶음: submission/SkillForge-review-bundle.zip
+- 신청서 답변: final-form-answers.md
+- 3분 시연 대본: policy-change-pitch.md
+- 최신 원본: artifacts/policy-change-evidence.json + policy-change-live-retry.json
+- 이전 버전 A/B/C 실험: eval-dc5a773edccd641d, 40건×3군×1회. 신규 정책 비교와 분모를 합치지 않음.
+- 소스 SHA-256: source-manifest.json
+- 로컬 키·토큰·SQLite·첨부 원문·팀원 개인정보를 공개 묶음에서 제외.
 
-PDF에는 공개 GitHub URL을 반영했습니다. 영상 파일은 저장소에서 다운로드할 수 있으며 비로그인 접근 HTTP 200을 확인했습니다. 공식 Skill API 요구 확인 후 최종 제출 여부를 판단합니다. Google Form 개인정보와 동의·최종 제출은 각 팀원이 직접 합니다.
+## 제출 순서
 
-## 현재 전달 파일과 제출 순서
+1. 실제 팀명을 확정하고 PDF 팀명과 파일명을 일치시킨다. 서비스명은 SkillForge.
+2. PDF에 들어 있는 GitHub와 영상 링크를 비로그인 상태에서 열어 본다.
+3. 각 팀원이 Google Form에 본인 개인정보·동의 항목을 직접 작성하고 공통 프로젝트 답변과 PDF를 제출한다. 팀당 한 번만 제출하는 방식이 아니다.
+4. 사용자에게 전달된 주최측 답변의 마감은 2026-09-28 23:59. 답변에 시간대 별도 표기는 없으므로 여유 있게 제출한다.
+5. 주최측 Skill API 답변이 오면 구현된 NVIDIA hosted Nemotron/NAT/MCP 증거와 대조한다. 답변 미수신 상태에서 요건 충족을 단정하지 않는다.
 
-1. `output/pdf/NVIDIA 해커톤_TraceMakers_SkillForge.pdf`가 폼에 올릴 문서 초안이다. 링크가 확정되면 PDF를 갱신한다.
-2. `submission/SkillForge-review-bundle.zip`은 소스·빌드 UI·증거·문서·영상의 검토용 묶음이다. GitHub에는 묶음의 `skillforge/` 내용을 저장하되 키와 DB를 추가하지 않는다.
-3. 서비스명은 `SkillForge`, 신청서 답변은 `final-form-answers.md`에서 복사한다.
-4. `output/video/SkillForge-evidence-walkthrough.mp4`는 3분 설명 자료다. 실제 화면 녹화가 아닌 실행 증거 재생 자료로 소개한다.
-5. GitHub URL 확정→문서 반영→비로그인 열람 확인→팀원 각자가 같은 프로젝트 자료로 신청서를 작성한다. 각자 개인정보·동의를 확인하고 직접 제출한다.
-6. Skill API 공식 요구 확인 전에는 기술 요건 충족을 확정하지 않는다.
-
-2026-09-21 공식 웹 자료 재조회 결과와 주최 측 문의 초안은 `docs/reviews/skill-api-gate.md`에 있다. 교육·행사 페이지 HTTP 200, 신청서 직접 조회 HTTP 401. Skill API 요건 확인 게이트는 해소되지 않았다.
+PDF와 영상은 최신 정책 변경 흐름을 반영했다. 영상은 저장된 실행 증거 시각화이며 실제 브라우저 녹화가 아니다. 로컬 콘솔 주소는 심사자용 배포 URL이 아니다. 신청서 자동 제출은 하지 않았다.

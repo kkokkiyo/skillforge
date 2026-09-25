@@ -67,6 +67,8 @@ for name in [
     "workflow-evidence.json",
     "reproduction-evidence.json",
     "safety-matrix.json",
+    "policy-change-evidence.json",
+    "policy-change-live-retry.json",
 ]:
     path = ROOT / "artifacts" / name
     if path.exists():
@@ -117,4 +119,3 @@ print(
         }
     )
 )
-

@@ -98,6 +98,8 @@ def validate_workflow(artifact):
         "source_mode",
         "support_count",
         "support_denominator",
+        "parent_artifact_hash",
+        "origin_policy_hash",
     }
     if (
         set(artifact) - allowed
@@ -502,7 +504,7 @@ class WorkflowService:
             item = dict(row)
             item["artifact"] = json.loads(item["artifact"])
             item["report"] = json.loads(item["report"]) if item["report"] else None
-            if item["state"] == "ACTIVE" and (
+            if item["state"] in {"ACTIVE", "VERIFIED", "CANDIDATE"} and (
                 item["artifact"]["policy_hash"] != policy_hash(self.db)
                 or item["artifact"]["tool_schema_hash"] != TOOL_SCHEMA_HASH
             ):
@@ -579,6 +581,8 @@ class WorkflowService:
         }
 
     def compile(self):
+        from .compiler import derive_steps
+        current_policy = policy_hash(self.db)
         allowed = {x["order_id"] for x in split_manifest()["discovery"]}
         with self.db.lock:
             runs = self.db.conn.execute(
@@ -601,30 +605,34 @@ class WorkflowService:
             )
             if (
                 not context
-                or context["policy_hash"] != policy_hash(self.db)
+                or context["policy_hash"] != current_policy
                 or context["tool_schema_hash"] != TOOL_SCHEMA_HASH
             ):
                 continue
-            sequence = [json.loads(e["payload"])["tool"] for e in requests]
             denominators[run["mode"]].add(run["input_ref"])
-            if sequence != SEQUENCE:
+            try:
+                steps = derive_steps(events, run["input_ref"], run["id"])
+                if steps != [step_definition(t, s) for t, s in zip(SEQUENCE, STEP_IDS)]:
+                    continue
+            except (PolicyError, KeyError, TypeError, ValueError):
                 continue
-            expected_steps = [step_definition(t, s) for t, s in zip(sequence, STEP_IDS)]
-            if any(
-                json.loads(e["provenance"])
-                != {k: v["ref"] for k, v in step["args"].items()}
-                for e, step in zip(requests, expected_steps)
-            ):
-                continue
-            buckets[run["mode"]].append(run)
-        selected = max(buckets.values(), key=len, default=[])
+            buckets[(run["mode"], digest(steps))].append((run, steps))
+        selected_pairs = max(buckets.values(), key=lambda rows: len({r[0]["input_ref"] for r in rows}), default=[])
+        selected = [row[0] for row in selected_pairs]
         unique = {r["input_ref"]: r for r in selected}
         if len(unique) < 5:
             raise PolicyError(
                 "INSUFFICIENT_TRACES",
                 "At least five independent successful discovery traces required",
             )
-        artifact = manual_workflow(self.db)
+        artifact = {
+            "name": "standard_refund", "version": 1,
+            "policy_hash": current_policy, "tool_schema_hash": TOOL_SCHEMA_HASH,
+            "input_schema": {"order_id": "string"},
+            "steps": selected_pairs[0][1],
+            "preconditions": ["owned_order", "received_return", "no_existing_refund"],
+            "postconditions": ["one_full_refund"],
+        }
         artifact.update(
             source_trace_ids=[r["id"] for r in unique.values()],
             source_mode=selected[0]["mode"],
@@ -634,6 +642,8 @@ class WorkflowService:
         validate_workflow(artifact)
         wid = "workflow-" + secrets.token_hex(6)
         with self.db.transaction():
+            if policy_hash(self.db) != current_policy:
+                raise PolicyError("STALE_POLICY", "Policy changed during compilation")
             self.db.conn.execute(
                 "INSERT INTO workflows VALUES (?,?,?,?,NULL)",
                 (wid, "CANDIDATE", json.dumps(artifact), digest(artifact)),
@@ -641,13 +651,19 @@ class WorkflowService:
         return self.get(wid)
 
     def verify(self, wid):
+        from .governance import expected_outcome, boundary_cases, replay_case
         item = self.get(wid)
         if not item:
             raise PolicyError("NOT_FOUND", "Workflow not found")
         if item["artifact_hash"] != digest(item["artifact"]):
             raise PolicyError("HASH_MISMATCH", "Artifact changed")
+        current = self.db.one("SELECT * FROM policies WHERE active=1")
+        if item["artifact"]["policy_hash"] != current["hash"]:
+            raise PolicyError("STALE_POLICY", "Create a new candidate for the current policy")
+        limit = current["approval_limit_krw"]
         results = []
         for case in split_manifest()["validation"]:
+            case = {**case, "expected": expected_outcome(case, limit)}
             db = Database()
             try:
                 # Evaluate under the same current policy as the candidate.
@@ -656,10 +672,7 @@ class WorkflowService:
                     db.conn.execute(
                         "INSERT OR REPLACE INTO policies VALUES (?,?,1)",
                         (
-                            policy_hash(self.db),
-                            self.db.one(
-                                "SELECT approval_limit_krw FROM policies WHERE active=1"
-                            )[0],
+                            current["hash"], limit,
                         ),
                     )
                 load_case(db, case)
@@ -693,16 +706,22 @@ class WorkflowService:
                 )
             finally:
                 db.conn.close()
+        boundaries = [replay_case(case, dict(current), item["artifact"]) for case in boundary_cases(limit)]
         report = {
             "split": "validation",
             "split_hash": split_manifest()["split_hash"],
             "artifact_hash": item["artifact_hash"],
             "cases": results,
-            "passed": all(x["passed"] for x in results),
+            "passed": all(x["passed"] for x in results + boundaries),
+            "boundary_checks": boundaries,
+            "policy_hash": current["hash"],
+            "approval_limit_krw": limit,
             "count": len(results),
             "source_mode": item["artifact"]["source_mode"],
         }
         with self.db.transaction():
+            if policy_hash(self.db) != current["hash"]:
+                raise PolicyError("STALE_POLICY", "Policy changed during verification")
             self.db.conn.execute(
                 "UPDATE workflows SET state=?,report=? WHERE id=?",
                 (
@@ -736,6 +755,8 @@ class WorkflowService:
                 "Validation report does not match artifact and current split",
             )
         with self.db.transaction():
+            if policy_hash(self.db) != item["artifact"]["policy_hash"]:
+                raise PolicyError("STALE_POLICY", "Policy changed before activation")
             self.db.conn.execute(
                 "UPDATE workflows SET state='DISABLED' WHERE state='ACTIVE'"
             )
