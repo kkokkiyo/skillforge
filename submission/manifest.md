@@ -1,7 +1,7 @@
 # 제출 manifest — 2026-09-26
 
 - 서비스명: SkillForge
-- 팀명: TraceMakers (임시안; 실제 신청서와 파일명을 일치시킬 것)
+- 팀명: TraceMakers
 - GitHub: https://github.com/kkokkiyo/skillforge
 - 영상: https://github.com/kkokkiyo/skillforge/blob/main/output/video/SkillForge-evidence-walkthrough.mp4
 - 폼 업로드: output/pdf/NVIDIA 해커톤_TraceMakers_SkillForge.pdf (4쪽)
@@ -15,7 +15,7 @@
 
 ## 제출 순서
 
-1. 실제 팀명을 확정하고 PDF 팀명과 파일명을 일치시킨다. 서비스명은 SkillForge.
+1. 팀명 TraceMakers, 서비스명 SkillForge를 모든 팀원이 동일하게 입력한다.
 2. PDF에 들어 있는 GitHub와 영상 링크를 비로그인 상태에서 열어 본다.
 3. 각 팀원이 Google Form에 본인 개인정보·동의 항목을 직접 작성하고 공통 프로젝트 답변과 PDF를 제출한다. 팀당 한 번만 제출하는 방식이 아니다.
 4. 사용자에게 전달된 주최측 답변의 마감은 2026-09-28 23:59. 답변에 시간대 별도 표기는 없으므로 여유 있게 제출한다.
