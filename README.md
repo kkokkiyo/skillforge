@@ -4,7 +4,7 @@
 
 환불 에이전트의 독립 성공 기록에서 동일한 전체 도구 순서와 인자 참조를 확인하고, 별도 검증과 운영자 활성화를 거쳐 새 주문에 재사용하는 로컬 데모입니다. 합성 주문만 사용하며 실제 결제는 없습니다.
 
-[3분 설명 영상](output/video/SkillForge-evidence-walkthrough.mp4) · [신청서 답변](submission/final-form-answers.md) · [실제 평가 원본](artifacts/eval/eval-dc5a773edccd641d/report.md)
+[3분 설명 영상](output/video/SkillForge-evidence-walkthrough.mp4) · [실제 평가 원본](artifacts/eval/eval-dc5a773edccd641d/report.md)
 
 영상은 실제 실행 증거를 시각화한 자막형 재생 자료입니다. 브라우저 화면 녹화가 아니며, 영상 안에서도 이를 표시합니다.
 
@@ -81,7 +81,7 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 
 ## 문서
 
-요구사항·설계·태스크는 `.kiro/specs/skillforge-mvp/`에, 전략·평가·제출 방법은 `docs/01`부터 `docs/11` 문서에 있습니다. Kiro 구조를 참고했으며 Kiro 내부 검증을 실행한 것은 아닙니다. 최신 구현 점검은 `docs/reviews/implementation-audit.md`, 제출 문구와 녹화 대본은 `submission/`에 있습니다.
+요구사항·설계·태스크는 `.kiro/specs/skillforge-mvp/`에, 화면 설계와 평가 방법은 `docs/02-ux-design.md`, `docs/03-evaluation.md`에 있습니다. Kiro 구조를 참고했으며 Kiro 내부 검증을 실행한 것은 아닙니다. 최신 구현 점검은 `docs/reviews/implementation-audit.md`에서 확인합니다.
 
 공개 GitHub 저장소: https://github.com/kkokkiyo/skillforge. 영상은 위 링크에서 다운로드할 수 있습니다. API 키·운영자 토큰·개인정보는 공개 저장소에 포함하지 않습니다.
 
@@ -91,7 +91,6 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 핵심 흐름은 `기록 → 출처 바인딩 → 독립 검증 → 활성화 → 정책 영향 비교 → 재검증`입니다. 범용 에이전트 메모리나 세계 최초 자동화라는 주장을 하지 않습니다. 환불 운영자가 어떤 변경으로 어떤 사례의 판정이 바뀌는지 확인할 수 있게 만든 데모입니다.
 
 - [새 구현과 검증](docs/reviews/policy-change-release.md)
-- [최신 데모 대본](submission/policy-change-pitch.md)
 - 재현: `PYTHONPATH=. .runtime/bin/python scripts/policy_change_demo.py` (mock)
 - 실제 NVIDIA 재현: 위 명령에 `--collect-live --live` 추가. API 호출과 사용량이 발생합니다.
 - 기존 A/B/C 수치는 이전 버전의 pilot입니다. 새 정책 실험과 동일한 측정으로 합치지 않습니다.

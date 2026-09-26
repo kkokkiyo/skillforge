@@ -32,7 +32,7 @@ def audit():
                         value = value.strip().strip("\"'")
                         if len(value) > 12:
                             secrets.add(value.encode())
-    manifest = json.loads((ROOT / "submission/source-manifest.json").read_text())
+    manifest = json.loads((ROOT / "artifacts/public-source-manifest.json").read_text())
     findings = []
     def scan(label, data):
         for name, pattern in PATTERNS.items():

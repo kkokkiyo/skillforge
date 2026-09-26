@@ -24,3 +24,12 @@ artifacts/
 .verify-runtime/
 tmp/
 docs/source-original.txt
+
+# Local application, rehearsal and team-only instructions
+submission/
+docs/05-submission-and-pitch.md
+docs/07-implementation-prompts.md
+docs/09-submission-runbook.md
+docs/10-developer-handoff.md
+docs/11-review-protocol.md
+docs/reviews/skill-api-gate.md

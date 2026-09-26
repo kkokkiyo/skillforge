@@ -28,6 +28,7 @@ folders = [
     "web/src",
     "web/dist",
 ]
+PRIVATE_FILES = {'docs/reviews/skill-api-gate.md', 'docs/09-submission-runbook.md', 'docs/07-implementation-prompts.md', 'docs/05-submission-and-pitch.md', 'docs/10-developer-handoff.md', 'docs/11-review-protocol.md'}
 files = [ROOT / x for x in base_files if (ROOT / x).is_file()]
 for folder in folders:
     for path in (ROOT / folder).rglob("*"):
@@ -37,7 +38,7 @@ for folder in folders:
             or path.suffix in {".pyc", ".sqlite3", ".db"}
         ):
             continue
-        if path.name == "source-original.txt":
+        if path.name == "source-original.txt" or path.relative_to(ROOT).as_posix() in PRIVATE_FILES:
             continue
         files.append(path)
 for name in [
@@ -50,8 +51,6 @@ for name in [
     path = ROOT / "web" / name
     if path.exists():
         files.append(path)
-for path in out.glob("*.md"):
-    files.append(path)
 for path in (ROOT / "output/pdf").glob("*.pdf"):
     files.append(path)
 for path in (ROOT / "output/video").glob("*"):
@@ -90,7 +89,8 @@ for path in sorted(set(files)):
             "Secret found in candidate file: " + str(path.relative_to(ROOT))
         )
     manifest[str(path.relative_to(ROOT))] = hashlib.sha256(data).hexdigest()
-manifest_path = out / "source-manifest.json"
+manifest_path = ROOT / "artifacts/public-source-manifest.json"
+manifest_path.parent.mkdir(parents=True, exist_ok=True)
 manifest_path.write_text(
     json.dumps(
         {
@@ -108,7 +108,7 @@ archive = out / "SkillForge-review-bundle.zip"
 with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
     for path in sorted(set(files)):
         z.write(path, "skillforge/" + str(path.relative_to(ROOT)))
-    z.write(manifest_path, "skillforge/submission/source-manifest.json")
+    z.write(manifest_path, "skillforge/artifacts/public-source-manifest.json")
 print(
     json.dumps(
         {
