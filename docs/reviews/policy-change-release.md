@@ -1,5 +1,8 @@
 # Policy change release — 2026-09-26
 
+> 2026-09-28 현재 상태: Nemotron API·NAT custom workflow·MCP 구성의 기술 요건 확인 완료. 아래 이전 날짜의 “확인 대기”는 당시 기록이다. 실제 통합 경로와 증거는 `docs/nvidia-architecture.md`를 따른다. NemoClaw/OpenShell OS 격리는 미검증으로 유지한다.
+
+
 ## 결과
 
 SkillForge의 초점을 “빠른 환불”에서 **실행 경험의 재사용 가능성을 정책 변화에 맞춰 검증하는 운영 콘솔**로 보강했다. 환불 업무·6단계 DSL·공통 gateway 범위는 유지한다. REQ-04/06/09/12, T20에 대응한다.

@@ -23,7 +23,7 @@ sections=[
  ('출처를 보존하고, 다시 검증합니다','기존 절차 STALE → 새 후보 → 검증 → 활성화',
   ['정책 적용 시 이전 버전의 절차 재사용을 중지합니다.','부모 hash와 원래 실행 출처를 새 후보에 남깁니다.','새 정책에서 분리 검증·경계 검사를 다시 통과해야 합니다.','35만원 주문: 승인 대기 → 단회 승인 → 1회 환불']),
  ('실제 증거와 한계를 함께 공개','github.com/kkokkiyo/skillforge',
-  ['신규 live 5개 출처 성공 · 변경 후 승인 대기 확인','변경 전 live: HTTP 500 실패 보존 → 별도 재실행 '+retry['result']['status'], 'OpenShell OS 격리·대회 Skill API 기준은 미확인','42쌍은 모의 비교입니다. 실서비스 안전성 보장이 아닙니다.'])
+  ['신규 live 5개 출처 성공 · 변경 후 승인 대기 확인','변경 전 live: HTTP 500 실패 보존 → 별도 재실행 '+retry['result']['status'], 'Nemotron·NAT·MCP 실제 증거 공개 / OpenShell 미검증','42쌍은 모의 비교입니다. 실서비스 안전성 보장이 아닙니다.'])
 ]
 def wrap(draw,text,width,f):
     lines=[];line=''

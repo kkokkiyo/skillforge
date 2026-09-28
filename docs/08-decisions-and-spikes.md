@@ -1,5 +1,8 @@
 # 결정 기록과 기술 검증 대장
 
+> 2026-09-28 현재 상태: Nemotron API·NAT custom workflow·MCP 구성의 기술 요건 확인 완료. 아래 이전 날짜의 “확인 대기”는 당시 기록이다. 실제 통합 경로와 증거는 `docs/nvidia-architecture.md`를 따른다. NemoClaw/OpenShell OS 격리는 미검증으로 유지한다.
+
+
 ## 확정한 제품 결정
 
 | ID | 결정 | 이유 |

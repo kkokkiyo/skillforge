@@ -90,7 +90,7 @@ CS 운영자로서 정상 환불과 예외를 재현하고 싶다.
 ## REQ-11 NVIDIA 통합 증거 — P0/P1
 
 - P0: WHEN 통합 검증이 완료되면 THE SYSTEM SHALL Nemotron 요청 및 NAT 실행/평가 증빙을 보고서에 연결한다.
-- P0 제출 게이트: THE TEAM SHALL 주최 측 Skill API 요구의 의미와 사용 증빙을 확인한다. 일반 NIM API 성공만으로 충족했다고 표시하지 않는다.
+- P0 기술 요건 확인 완료 (2026-09-28): 현재 Nemotron API·NAT custom workflow·MCP 구성으로 충족. 특정 Skill API·NemoClaw·OpenShell 실행은 필수가 아니다. 실제 활용 증거는 유지한다.
 - P1: WHEN OpenShell 프로필이 켜져 있으면 THE SYSTEM SHALL 허용/차단 실험 로그와 실제 버전을 표시한다. 미실행이면 “격리 미검증”으로 표시한다.
 
 ## 비목표

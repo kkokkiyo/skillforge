@@ -76,7 +76,7 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 - 초기 live A/B/C 평가에서 429가 많았습니다. 실패도 보존하며 이를 속도 개선 근거로 쓰지 않습니다.
 - 57개 회귀 테스트 및 별도 가상환경에서 제출 ZIP 설치·테스트·빌드 UI 제공 재현 통과. 최종 결과는 `docs/reviews/implementation-audit.md`에서 확인합니다.
 - NAT는 custom workflow를 호스팅합니다. 자체 bounded loop를 NAT 기본 ReAct agent라고 소개하지 않습니다.
-- OpenShell OS 격리와 대회의 ‘Skill API’ 세부 요건은 미확정입니다. 앱의 업무 정책 검사를 OS 격리라고 표시하지 않습니다.
+- 현재 NVIDIA API·NAT 통합의 기술 요건은 확인했습니다. OpenShell OS 격리는 구현·검증 범위 밖이며 앱의 업무 정책 검사와 구별합니다.
 - 루프백 개발용 인증입니다. 인터넷 배포나 멀티테넌트 운영용 인증이 아닙니다.
 
 ## 문서
@@ -94,3 +94,5 @@ SKILLFORGE_DB=:memory: PYTHONPATH=. .runtime/bin/python tests/http_lifecycle_smo
 - 재현: `PYTHONPATH=. .runtime/bin/python scripts/policy_change_demo.py` (mock)
 - 실제 NVIDIA 재현: 위 명령에 `--collect-live --live` 추가. API 호출과 사용량이 발생합니다.
 - 기존 A/B/C 수치는 이전 버전의 pilot입니다. 새 정책 실험과 동일한 측정으로 합치지 않습니다.
+
+NVIDIA의 실제 역할·호출 경로·로그 증거는 [통합 아키텍처](docs/nvidia-architecture.md)에 연결했습니다.

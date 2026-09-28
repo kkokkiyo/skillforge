@@ -1,5 +1,8 @@
 # 최종 구현·제출 준비 점검 — 2026-09-21
 
+> 2026-09-28 현재 상태: Nemotron API·NAT custom workflow·MCP 구성의 기술 요건 확인 완료. 아래 이전 날짜의 “확인 대기”는 당시 기록이다. 실제 통합 경로와 증거는 `docs/nvidia-architecture.md`를 따른다. NemoClaw/OpenShell OS 격리는 미검증으로 유지한다.
+
+
 서비스 **SkillForge** / 임시 팀명 **TraceMakers** / 저장소명 추천 `skillforge`.
 이 문서가 과거 M1 및 중간 점검 보고서보다 최신이다. 공개 제출 완료를 뜻하지 않는다.
 

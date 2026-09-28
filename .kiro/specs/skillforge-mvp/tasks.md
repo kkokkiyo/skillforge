@@ -1,10 +1,13 @@
 # 구현 태스크
 
+> 2026-09-28 현재 상태: Nemotron API·NAT custom workflow·MCP 구성의 기술 요건 확인 완료. 아래 이전 날짜의 “확인 대기”는 당시 기록이다. 실제 통합 경로와 증거는 `docs/nvidia-architecture.md`를 따른다. NemoClaw/OpenShell OS 격리는 미검증으로 유지한다.
+
+
 모든 체크박스는 구현 전이다. 시간은 2인 팀용 사람-시간 추정이며 실측 생산성이나 납기 보장이 아니다. A=backend/agent, B=frontend/evaluation 역할 가칭. 같은 사람이 담당하면 의존 순서대로 진행한다.
 
 ## T00 — 제출 요건과 기술 검증 [P0, 5h, A+B, 선행 없음]
 
-- [ ] Skill API 명칭·endpoint·필수 모델·증빙 방법을 공식 안내/문의로 확인하고 docs/08에 근거 기록.
+- [x] 기술 요건 확인 (2026-09-28): 현재 구성이 충분하며 특정 Skill API·NemoClaw·OpenShell 실행은 필수가 아님. 통합 증거는 docs/nvidia-architecture.md 참조.
 - [ ] NVIDIA 키는 환경변수로만 주입하여 모델 tool call 1회, 한국어 refund intent 10문장, JSON schema 성공 여부 확인.
 - [ ] Python/NAT/MCP 호환 조합과 lock 전략 확인. NAT 최소 실행·프로파일 산출물 확보.
 - [ ] WSL Docker 및 OpenShell 프로필 설치 가능성만 제한 시간 내 조사. 유료 자원은 생성하지 않음.
